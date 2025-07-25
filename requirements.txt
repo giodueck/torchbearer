@@ -1,3 +1,4 @@
 torchgeo
 tensorboard
 matplotlib
+scikit-learn
