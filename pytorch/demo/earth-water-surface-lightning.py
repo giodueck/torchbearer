@@ -15,24 +15,29 @@ import torch.nn.functional as F
 from torchgeo.datasets import RasterDataset, stack_samples, unbind_samples, utils
 from torchgeo.samplers import RandomGeoSampler, Units
 from torchgeo.transforms import indices
-from torchgeo import transforms
+from torchgeo.datamodules import GeoDataModule
+from torchvision import transforms
 import lightning as L
 
 from torchvision.models.segmentation import deeplabv3_resnet50
 
 
-class SurfaceWaterDataModule(L.LightningDataModule):
-    def __init__(self, data_dir: str = "path/to/dir", batch_size: int = 32):
-        super().__init__()
+class SurfaceWaterDataModule(GeoDataModule):
+    def __init__(self, data_dir: str = "path/to/dir", batch_size: int = 32, num_workers: int = 1):
+        super().__init__(dataset_class=RasterDataset, num_workers=num_workers)
         self.data_dir = data_dir
         self.batch_size = batch_size
+        self.num_workers = num_workers
+        self.in_channels = 9
+        self.num_classes = 2
 
     def prepare_data(self):
-        root = Path(self.data_dir) / "dset-s2"
+        root = Path(self.data_dir)
         utils.download_and_extract_archive(
             'https://hf.co/datasets/cordmaur/earth_surface_water/resolve/main/earth_surface_water.zip',
             root,
         )
+        root = root / 'dset-s2'
 
         train_imgs = RasterDataset(
             paths=(root / 'tra_scene').as_posix(), crs='epsg:3395', res=10, transforms=self.scale
@@ -65,10 +70,8 @@ class SurfaceWaterDataModule(L.LightningDataModule):
             norm,
         )
 
-        train_imgs.dataset.transforms = transforms.Compose([
-            self.scale,
-            tfms
-        ])
+        train_imgs['image'] = tfms(train_imgs['image'])
+        valid_imgs['image'] = tfms(valid_imgs['image'])
 
         # IMPORTANT
         train_msks.is_image = False
@@ -110,7 +113,7 @@ class SurfaceWaterDataModule(L.LightningDataModule):
         # Used to clean-up when the run is finished
         pass
 
-    def scale(item: dict):
+    def scale(self, item: dict):
         item['image'] = item['image'] / 10000
         return item
 
@@ -159,7 +162,7 @@ class SurfaceWaterEncoder(nn.Module):
         backbone.register_module('conv1', conv)
 
     def forward(self, x):
-        return self.resnet.forward(x)
+        return self.resnet(x)['out']
 
 
 class SurfaceWaterLitModule(L.LightningModule):
@@ -168,13 +171,16 @@ class SurfaceWaterLitModule(L.LightningModule):
         self.encoder = encoder
 
     def training_step(self, batch, batch_idx):
-        x, y = batch
+        x = batch['image']
+        print(f'{type(x)}')
+        y = batch['mask']
         y_hat = self.encoder(x)
         loss = F.cross_entropy(y_hat, y)
         return loss
 
     def validation_step(self, batch, batch_idx):
-        x, y = batch
+        x = batch['image']
+        y = batch['mask']
         y_hat = self.encoder(x)
         loss = F.cross_entropy(y_hat, y)
         return loss
@@ -187,6 +193,6 @@ class SurfaceWaterLitModule(L.LightningModule):
 
 resnet = SurfaceWaterEncoder()
 model = SurfaceWaterLitModule(resnet)
-data_module = SurfaceWaterDataModule(data_dir=Path("/root/data"), batch_size=8)
+data_module = SurfaceWaterDataModule(data_dir=Path("/root/data"), batch_size=8, num_workers=7)
 trainer = L.Trainer(min_epochs=1, max_epochs=10)
 trainer.fit(model=model, datamodule=data_module)
