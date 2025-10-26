@@ -14,5 +14,5 @@ docker build . -t torchbearer:0.0.0
 ```sh
 mkdir .cache
 mkdir data
-docker run -ti -v $PWD/.cache:/root/.cache -v $PWD/data:/root/data --gpus all torchbearer:0.0.0 python pytorch/demo/earth-water-surface-lightning.py
+docker run -ti -v $PWD/.cache:/root/.cache -v $PWD/data:/root/data -v $PWD/src:/workdir/src --gpus all torchbearer:0.0.0 python src/demo/earth-water-surface-lightning.py
 ```

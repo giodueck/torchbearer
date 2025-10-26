@@ -22,7 +22,6 @@ RUN export NVIDIA_CONTAINER_TOOLKIT_VERSION=1.16.2-1 && \
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN mkdir /build
-COPY pytorch /build/pytorch
+RUN mkdir /workdir
 
-WORKDIR /build
+WORKDIR /workdir
