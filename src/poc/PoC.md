@@ -8,3 +8,5 @@
 - add truth layer, i.e. paint areas to label
 - binary label generation from truth layer, e.g. if coverage > some percentage then yes else no
 - train small classification model based on that generated data, from just one or a small number of images
+    - [x] create dataset on hardcoded downloaded images
+    - [ ] create dataset downloading images
