@@ -34,6 +34,6 @@ if __name__ == "__main__":
             # the feature looked for, set the label to true if the average
             # pixel has a value of at least 10, the maximum being 255
             if np.average(subimg) >= 10:
-                dst.write(f"{prefix}-{i}.jp2,true\n")
+                dst.write(f"{prefix}-{i}.jp2,1\n")
             else:
-                dst.write(f"{prefix}-{i}.jp2,false\n")
+                dst.write(f"{prefix}-{i}.jp2,0\n")
