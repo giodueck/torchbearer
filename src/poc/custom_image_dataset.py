@@ -6,9 +6,10 @@ import pandas as pd
 
 
 class CustomImageDataset(Dataset):
-    def __init__(self, annotations_file, img_dir):
+    def __init__(self, annotations_file, img_dir, transform=None):
         self.img_labels = pd.read_csv(annotations_file)
         self.img_dir = img_dir
+        self.transform = transform
 
     def __len__(self):
         return len(self.img_labels)
@@ -18,4 +19,6 @@ class CustomImageDataset(Dataset):
         with rasterio.open(img_path, "r") as f:
             image = torch.from_numpy(f.read(1))
         label = self.img_labels.iloc[idx, 1]
+        if self.transform:
+            image = self.transform(image)
         return image, label
