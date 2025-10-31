@@ -32,8 +32,8 @@ if __name__ == "__main__":
 
             # Assuming the image is a mask, where white marks the presence of
             # the feature looked for, set the label to true if the average
-            # pixel has a value of at least 10, the maximum being 255
-            if np.average(subimg) >= 10:
+            # pixel has a value of at least 30, the maximum being 255
+            if np.average(subimg) >= 30:
                 dst.write(f"{prefix}-{i}.jp2,1\n")
             else:
                 dst.write(f"{prefix}-{i}.jp2,0\n")
