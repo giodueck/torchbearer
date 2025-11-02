@@ -16,6 +16,19 @@ in a custom dataset.
     - [ ] create dataset downloading images
 
 ## Notes
+### Control
+Predicting `False` for all test images (also known as most experiments before the first converging one):
+```
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃        Test metric        ┃       DataLoader 0        ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│         test_acc          │    0.5400000214576721     │
+│         test_loss         │    0.7007813453674316     │
+└───────────────────────────┴───────────────────────────┘
+```
+
+Any accuracy better than a coin flip would be progress.
+
 ### First converging run
 #### Results
 ```
@@ -77,6 +90,14 @@ This produces 392 images tagged `True`, and the rest tagged `False`. This is com
         x = self.dropout(x)
         x = self.fc2(x)
         return x
+
+    # --snip--
+
+    def configure_optimizers(self):
+        # If using a scheduler, also do the setup here
+        # return torch.optim.SGD(self.parameters(), lr=0.001, momentum=0.8)
+        return torch.optim.AdamW(self.parameters(), lr=0.0001, weight_decay=0)
+
 ```
 
 #### Trainer
@@ -96,4 +117,25 @@ This produces 392 images tagged `True`, and the rest tagged `False`. This is com
     trainer = pl.Trainer(min_epochs=1, max_epochs=32,
                          log_every_n_steps=8, logger=logger, callbacks=[early_stopping, model_checkpoint],
                          )
+```
+
+#### Some tweaks
+With a learning rate of 0.00005 instead of 0.0001 (halved), a patience of 7 instead of 5, and max_epochs of 50 instead of 32, a run that stopped at epoch=47 resulted in even better accuracy:
+```
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃        Test metric        ┃       DataLoader 0        ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│         test_acc          │     0.800000011920929     │
+│         test_loss         │    0.4062427580356598     │
+└───────────────────────────┴───────────────────────────┘
+```
+
+Additionally, a weight_decay of 0.01 produced a validation loss graph that consistently trailed the one before, but achieved better test results anyways:
+```
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃        Test metric        ┃       DataLoader 0        ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│         test_acc          │    0.8199999928474426     │
+│         test_loss         │    0.37320077419281006    │
+└───────────────────────────┴───────────────────────────┘
 ```

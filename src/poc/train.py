@@ -10,13 +10,13 @@ if __name__ == "__main__":
     model = CustomLightningModule(11, 128, 128, 2)
 
     logger = TensorBoardLogger("data/logs")
-    early_stopping = EarlyStopping("val_loss", patience=5, mode="min")
+    early_stopping = EarlyStopping("val_loss", patience=7, mode="min")
     model_checkpoint = ModelCheckpoint(
         monitor="val_acc",
         save_top_k=1,
         mode="max",
     )
-    trainer = pl.Trainer(min_epochs=1, max_epochs=32,
+    trainer = pl.Trainer(min_epochs=1, max_epochs=50,
                          log_every_n_steps=8, logger=logger, callbacks=[early_stopping, model_checkpoint],
                          )
 

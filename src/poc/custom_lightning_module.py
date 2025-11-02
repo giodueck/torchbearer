@@ -75,7 +75,7 @@ class CustomLightningModule(pl.LightningModule):
     def configure_optimizers(self):
         # If using a scheduler, also do the setup here
         # return torch.optim.SGD(self.parameters(), lr=0.001, momentum=0.8)
-        return torch.optim.AdamW(self.parameters(), lr=0.0001, weight_decay=0)
+        return torch.optim.AdamW(self.parameters(), lr=0.00005, weight_decay=0.01)
 
     # Many more possible steps or ends of steps, in which stuff like logging could be done
 
