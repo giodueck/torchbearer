@@ -33,9 +33,6 @@ if __name__ == "__main__":
 
             fraction = np.sum(subimg > 0) / subimg.size
 
-            # Assuming the image is a mask, where white marks the presence of
-            # the feature looked for, set the label to true if the average
-            # pixel has a value of at least 30, the maximum being 255
             if fraction > threshold:
                 dst.write(f"{prefix}-{i}.jp2,1\n")
             else:
