@@ -139,3 +139,17 @@ Additionally, a weight_decay of 0.01 produced a validation loss graph that consi
 │         test_loss         │    0.37320077419281006    │
 └───────────────────────────┴───────────────────────────┘
 ```
+
+### Combined datasets
+Combining 1000 images from each of the tiles T20KNA and T20KNB, the accuracy stayed at >80%, even when the proportion of images containing a paleochannel dropped to around 29% of the dataset:
+
+```
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃        Test metric        ┃       DataLoader 0        ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│         test_acc          │    0.8349999785423279     │
+│         test_loss         │    0.3819182515144348     │
+└───────────────────────────┴───────────────────────────┘
+```
+
+The loss weights had to be adjusted, in this run they were `[0.75, 0.25]`.
