@@ -15,6 +15,14 @@ in a custom dataset.
     - [x] create dataset on hardcoded downloaded images
     - [ ] create dataset downloading images
 
+## Running the experiment training
+The trainer, the dataset and datamodule and the lightning module are tied together in `train.py`. To run the training, first create and label the dataset as described later in the "Dataset" section, then run the trainer inside the container:
+```bash
+docker run -ti -v $PWD/.cache:/workdir/.cache -v $PWD/data:/workdir/data -v $PWD/src:/workdir/src --gpus all torchbearer:0.0.0 python src/poc/train.py
+```
+
+Live stats and graphs to understand what is happening to the training
+
 ## Notes
 ### Control
 Predicting `False` for all test images (also known as most experiments before the first converging one):
@@ -153,3 +161,16 @@ Combining 1000 images from each of the tiles T20KNA and T20KNB, the accuracy sta
 ```
 
 The loss weights had to be adjusted, in this run they were `[0.75, 0.25]`.
+
+### Different sizes
+Generating a dataset of 192x192 images instead of 128x128 gives the following results:
+```
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃        Test metric        ┃       DataLoader 0        ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│         test_acc          │    0.8299999833106995     │
+│         test_loss         │    0.35937783122062683    │
+└───────────────────────────┴───────────────────────────┘
+```
+
+The downside is that the larger images take much more memory and have to be processed in smaller batches, for my machine in batches of 2.

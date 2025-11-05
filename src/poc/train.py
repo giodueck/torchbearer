@@ -6,9 +6,9 @@ from pytorch_lightning.loggers import TensorBoardLogger
 
 if __name__ == "__main__":
     # Polygons as masks are less learnable, I can't seem to get over 65% accuracy, while the hand-drawn one gets 82%
-    datamodule = CustomDataModule(batch_size=4)
+    datamodule = CustomDataModule(batch_size=2)
 
-    model = CustomLightningModule(11, 128, 128, 2)
+    model = CustomLightningModule(11, 192, 192, 2)
 
     logger = TensorBoardLogger("data/logs")
     early_stopping = EarlyStopping("val_loss", patience=7, mode="min")

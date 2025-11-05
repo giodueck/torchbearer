@@ -22,7 +22,7 @@ class CustomLightningModule(pl.LightningModule):
         self.fc1 = torch.nn.Linear(64*(img_height//(2*2*2))*(img_width//(2*2*2)), 512)
         self.fc2 = torch.nn.Linear(512, num_classes)
 
-        class_counts = torch.tensor([0.75, 0.25])
+        class_counts = torch.tensor([0.60, 0.40])
         weights = 1.0 / class_counts  # inverse frequency weighting
         weights = weights / weights.sum()  # normalize if needed
         self.loss_fn = torch.nn.CrossEntropyLoss(weight=weights)
