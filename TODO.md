@@ -5,10 +5,10 @@
     - Train small classification models with lightning
         - Results: >80% correct predictions for datasets with 50-80% of images containing paleochannels
     - Test torchgeo datasets and datamodules
-- [ ] Sentinel-2 dataset
+- [x] Sentinel-2 dataset
     - Custom dataset class since the copernicus browser downloads don't work for the current iteration of torchgeo's Sentinel2 dataset
-    - [ ] Local files support
-    - [ ] Download support
+    - [x] Local files support
+    - [x] Download support
     - [ ] Normalization and data augmentation
 - [ ] Sentinel-2 label dataset
     - T20KNA
