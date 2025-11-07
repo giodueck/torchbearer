@@ -1,0 +1,1 @@
+from .sentinel2_60m_datamodule import Sentinel2_60mDataModule

@@ -1,8 +1,8 @@
-import pytorch_lightning as pl
-from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
+import lightning.pytorch as pl
+from lightning.pytorch.callbacks import EarlyStopping, ModelCheckpoint
 from custom_lightning_module import CustomLightningModule
 from custom_datamodule import CustomDataModule
-from pytorch_lightning.loggers import TensorBoardLogger
+from lightning.pytorch.loggers import TensorBoardLogger
 
 if __name__ == "__main__":
     # Polygons as masks are less learnable, I can't seem to get over 65% accuracy, while the hand-drawn one gets 82%

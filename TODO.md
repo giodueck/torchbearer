@@ -10,12 +10,19 @@
     - [x] Local files support
     - [x] Download support
     - [ ] Normalization and data augmentation
-- [ ] Sentinel-2 label dataset
-    - T20KNA
-    - T20KNB
-    - [ ] Attach geolocation data to jpg files
-    - [ ] Create better labels with QGIS
-- [ ] Sentinel-2 datamodule
+- [x] Sentinel-2 label dataset
+    - [x] Convert PNG data to geotagged GeoTIFF
+    - Tiles:
+        - [x] T20KNA
+        - [x] T20KNB
+        - [ ] T20KPC
+        - expand
+- [x] Sentinel-2 datamodule
+- Segmentation models
+    - [x] UNet
+        Validation loss seems to behave, check result with plot of output compared to image and mask
+    - [ ] Fully convolutional network
+    - [ ] Try torchgeo modules
 - [ ] Generic trainer
     - Should be able to take in a lightning module and training hyperparameters
 - [ ] Training queue

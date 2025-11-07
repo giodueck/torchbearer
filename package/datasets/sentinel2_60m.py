@@ -143,7 +143,7 @@ class Sentinel2_60m(RasterDataset):
             return fig
 
 
-# # How to use (from project root): $ python -m package.datasets.sentinel2_60m data package/poc/masks
+# # How to use (from project root): $ python -m package.datasets.sentinel2_60m data masks
 # if __name__ == "__main__":
 #     img = Sentinel2_60m(argv[1], products=PRODUCTS)
 #     mask = LabelDataset(argv[2])

@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.0]
+
+### Added
+
+- Sentinel2 dataset and dataloader
+- Label dataset for masks
+- UNet module
+- Trainer for UNet module and Sentinel2 datamodule
+
+### Changed
+
+- Moved masks from `package/poc/masks` to `masks`
+- Changed mask format from JPG to PNG for lossless compression when converting to GeoTIFF
+
 ## [0.0.0]
 
 ### Added

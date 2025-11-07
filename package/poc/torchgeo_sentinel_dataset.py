@@ -3,7 +3,7 @@ from torchgeo.datasets import RasterDataset, stack_samples, unbind_samples
 from torchgeo.samplers import RandomGeoSampler
 from sys import argv
 import matplotlib.pyplot as plt
-from pytorch_lightning.utilities.data import DataLoader
+from lightning.pytorch.utilities.data import DataLoader
 
 
 class Sentinel2(RasterDataset):

@@ -1,4 +1,4 @@
-import pytorch_lightning as pl
+import lightning.pytorch as pl
 from custom_image_dataset import CustomImageDataset
 import torch
 from torch.utils.data import random_split, DataLoader
