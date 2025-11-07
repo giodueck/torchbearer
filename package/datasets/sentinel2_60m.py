@@ -143,19 +143,20 @@ class Sentinel2_60m(RasterDataset):
             return fig
 
 
-# # How to use (from project root): $ python -m package.datasets.sentinel2_60m data masks
-# if __name__ == "__main__":
-#     img = Sentinel2_60m(argv[1], products=PRODUCTS)
-#     mask = LabelDataset(argv[2])
-#     ds = img & mask
-#     g = torch.Generator().manual_seed(3)
-#     sampler = RandomGeoSampler(ds, size=256, length=3, generator=g)
-#     dataloader = DataLoader(ds, sampler=sampler, collate_fn=stack_samples)
-#
-#     for batch in dataloader:
-#         sample = unbind_samples(batch)[0]
-#         _, axes = plt.subplots(ncols=2)
-#         imgfig = img.plot(sample, axes[0])
-#         maskfig = mask.plot(sample, axes[1])
-#         plt.axis('off')
-#         plt.show()
+# How to use (from project root): $ python -m package.datasets.sentinel2_60m data masks
+if __name__ == "__main__":
+    img = Sentinel2_60m(argv[1], products=PRODUCTS)
+    mask = LabelDataset(argv[2])
+    ds = img & mask
+    g = torch.Generator().manual_seed(3)
+    sampler = RandomGeoSampler(ds, size=256, length=3, generator=g)
+    dataloader = DataLoader(ds, sampler=sampler, collate_fn=stack_samples)
+
+    for batch in dataloader:
+        sample = unbind_samples(batch)[0]
+        print(sample['mask'])
+        _, axes = plt.subplots(ncols=2)
+        imgfig = img.plot(sample, axes[0])
+        maskfig = mask.plot(sample, axes[1])
+        plt.axis('off')
+        plt.show()

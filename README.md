@@ -11,8 +11,12 @@ docker build . -t torchbearer:0.0.0
 ```
 
 ## Running the training
+In the `PWD`:
+- data/: contains source images
+- masks/: contains ground truth images (masks or labels)
+- package/: contains the Python code
+
+Run the package by doing:
 ```sh
-mkdir .cache
-mkdir data
-docker run -ti -v $PWD/.cache:/root/.cache -v $PWD/data:/root/data -v $PWD/src:/workdir/src --gpus all torchbearer:0.0.0 python src/demo/earth-water-surface-lightning.py
+docker run -ti -v $PWD/data:/workdir/data -v $PWD/masks:/workdir/masks -v $PWD/package:/workdir/package --gpus all torchbearer:0.0.0 python -m package.trainer
 ```

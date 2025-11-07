@@ -27,3 +27,5 @@
     - Should be able to take in a lightning module and training hyperparameters
 - [ ] Training queue
     - Pass a list of settings and run training loops in sequence
+- [ ] Add segmentation accuracy metric
+- [ ] Add a profiler

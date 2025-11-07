@@ -28,7 +28,8 @@ if __name__ == "__main__":
     early_stopping = EarlyStopping('val_loss', patience=5, mode='min')
     model_checkpoint = ModelCheckpoint('val_loss', save_top_k=1, mode='min')
 
-    trainer = pl.Trainer(min_epochs=1, max_epochs=10, log_every_n_steps=8,
+    trainer = pl.Trainer(min_epochs=1, max_epochs=20, log_every_n_steps=8,
                          logger=logger, callbacks=[early_stopping, model_checkpoint])
 
     trainer.fit(model, datamodule=datamodule)
+    trainer.test(model, datamodule=datamodule)

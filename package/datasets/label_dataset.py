@@ -12,6 +12,15 @@ class LabelDataset(RasterDataset):
     filename_regex = r"^.{6}"
     is_image = False
 
+    def __getitem__(self, query):
+        item = super().__getitem__(query)
+
+        mask = item['mask'].float()
+        if mask.max() > 0.0:
+            mask /= item['mask'].max()
+        item['mask'] = mask
+        return item
+
     def plot(self, sample, ax=None):
         # Reorder and rescale the image
         mask = sample['mask']
