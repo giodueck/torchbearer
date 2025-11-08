@@ -18,5 +18,23 @@ In the `PWD`:
 
 Run the package by doing:
 ```sh
-docker run -ti -v $PWD/data:/workdir/data -v $PWD/masks:/workdir/masks -v $PWD/package:/workdir/package --gpus all torchbearer:0.0.0 python -m package.trainer
+docker run -ti \
+    -v $PWD/data:/workdir/data \
+    -v $PWD/masks:/workdir/masks \
+    -v $PWD/package:/workdir/package \
+    --gpus all \
+    torchbearer:0.0.0 \
+    python -m package.trainer
+```
+
+## Plotting results
+
+```sh
+docker run -ti \
+    -v $PWD/data:/workdir/data \
+    -v $PWD/masks:/workdir/masks \
+    -v $PWD/package:/workdir/package \
+    --gpus all \
+    torchbearer:0.0.0 \
+    python -m package.plotter path/to/checkpoint.ckpt path/to/hparams.yaml
 ```

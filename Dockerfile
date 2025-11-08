@@ -11,6 +11,7 @@ RUN apt update && \
     apt install -y build-essential && \
     apt clean
 
+# Can't run too new Cuda versions locally, as I have a 10 series card which is only supported in versions 12.x
 RUN export NVIDIA_CONTAINER_TOOLKIT_VERSION=1.16.2-1 && \
     apt-get install -y \
       nvidia-container-toolkit=${NVIDIA_CONTAINER_TOOLKIT_VERSION} \

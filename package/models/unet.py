@@ -24,6 +24,7 @@ class DoubleConv(nn.Module):
 class UNet(pl.LightningModule):
     def __init__(self, in_channels=3, out_channels=1, features=[64, 128, 256, 512], lr=1e-4):
         super().__init__()
+        self.save_hyperparameters()
         self.downs = nn.ModuleList()
         self.ups = nn.ModuleList()
         self.pool = nn.MaxPool2d(kernel_size=2, stride=2)

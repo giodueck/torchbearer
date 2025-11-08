@@ -72,9 +72,21 @@ class Sentinel2_60mDataModule(GeoDataModule):
     def test_dataloader(self):
         return DataLoader(self.test_dataset, sampler=self.test_sampler, batch_size=self.batch_size, num_workers=self.num_workers, collate_fn=stack_samples)
 
-    def plot(self, sample):
-        _, axes = plt.subplots(ncols=2)
+    def plot(self, sample, filename: str | None = None):
+        if 'output' in sample.keys():
+            figure, axes = plt.subplots(ncols=3)
+        else:
+            figure, axes = plt.subplots(ncols=2)
+
         img_fig = self.sentinel2.plot(sample, axes[0])
         label_fig = self.label.plot(sample, axes[1])
+        if 'output' in sample.keys():
+            output = sample['output'].cpu().squeeze()
+            output_fig = axes[2].imshow(output, cmap='Blues')
         plt.axis('off')
-        plt.show()
+        if filename is not None:
+            plt.savefig(filename)
+            print(filename)
+        else:
+            plt.show()
+        plt.close(figure)
