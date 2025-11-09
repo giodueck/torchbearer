@@ -9,6 +9,7 @@ from kornia.constants import DataKey, Resample
 from torchgeo.samplers.utils import _to_tuple
 from torchgeo.samplers import RandomBatchGeoSampler, GridGeoSampler, RandomGeoSampler
 import matplotlib.pyplot as plt
+import os
 
 
 class Sentinel2_60mDataModule(GeoDataModule):
@@ -26,6 +27,12 @@ class Sentinel2_60mDataModule(GeoDataModule):
                 DataKey.MASK: {'resample': Resample.NEAREST,
                                'align_corners': None}
             },
+        )
+
+        self.aug = K.AugmentationSequential(
+            K.Normalize(mean=self.mean, std=self.std),
+            data_keys=None,
+            keepdim=True,
         )
 
         self.sentinel_path = sentinel_path
@@ -74,17 +81,22 @@ class Sentinel2_60mDataModule(GeoDataModule):
 
     def plot(self, sample, filename: str | None = None):
         if 'output' in sample.keys():
-            figure, axes = plt.subplots(ncols=3)
+            figure, axes = plt.subplots(ncols=2, nrows=2)
+            axes = axes.flatten()
         else:
             figure, axes = plt.subplots(ncols=2)
 
+        plt.axis('on')
         img_fig = self.sentinel2.plot(sample, axes[0])
         label_fig = self.label.plot(sample, axes[1])
         if 'output' in sample.keys():
             output = sample['output'].cpu().squeeze()
             output_fig = axes[2].imshow(output, cmap='Blues')
-        plt.axis('off')
+            pred = (output > 0.5).float()
+            pred_fig = axes[3].imshow(pred, cmap='Blues')
+
         if filename is not None:
+            os.makedirs(filename.rsplit('/', 1)[0], exist_ok=True)
             plt.savefig(filename)
             print(filename)
         else:

@@ -8,6 +8,7 @@
 - Label dataset for masks
 - UNet module
 - Trainer for UNet module and Sentinel2 datamodule
+- Plotter for showing results of predictions by checkpoint models
 
 ### Changed
 

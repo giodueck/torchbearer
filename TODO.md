@@ -9,7 +9,7 @@
     - Custom dataset class since the copernicus browser downloads don't work for the current iteration of torchgeo's Sentinel2 dataset
     - [x] Local files support
     - [x] Download support
-    - [ ] Normalization and data augmentation
+    - [x] Normalization and data augmentation
 - [x] Sentinel-2 label dataset
     - [x] Convert PNG data to geotagged GeoTIFF
     - Tiles:
