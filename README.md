@@ -36,5 +36,7 @@ docker run -ti \
     -v $PWD/package:/workdir/package \
     --gpus all \
     torchbearer:0.0.0 \
-    python -m package.plotter path/to/checkpoint.ckpt path/to/hparams.yaml
+    python -m package.plotter path/to/checkpoint.ckpt path/to/hparams.yaml <number of plots to generate>
 ```
+
+This command will generate plots under `data/plots` with filenames like `plot_{i}.png`.
