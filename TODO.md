@@ -25,12 +25,18 @@
     - [ ] Fully convolutional network
     - [ ] Try torchgeo modules
 - [x] Generic trainer:
-    - Should be able to take in a lightning module and training hyperparameters
+    Should be able to take in a lightning module and training hyperparameters
+    - [x] Set job with a config file
 - [x] Training queue
     - Pass a list of settings and run training loops in sequence
 - [ ] Add segmentation accuracy metric
 - [ ] Add a profiler
 - [ ] Generate predicted masks for entire tiles by collaging predictions
+- Citations:
+    - U Net paper: https://arxiv.org/abs/1505.04597
+    - Pytorch
+    - Pytorch lightning
+    - Torchgeo
 
 ## Next
 ### Need
@@ -38,8 +44,9 @@
     - [x] Set job with a config file
 - Training queue
     - [x] Set a number of training rounds to run in sequence
-    - [ ] Properly log which versions correspond to which job
+    - [x] Properly log which versions correspond to which job
 ### Want
 - [ ] Add a profiler
 - [ ] Generate predicted masks for entire tiles by collaging predictions
 - [ ] Revisit tiles with results of previous experiments to refine masks
+- [ ] Add segmentation accuracy metric

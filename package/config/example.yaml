@@ -6,9 +6,10 @@ model_params:
     - 128
     - 256
     - 512
+  lr: 0.0001
 datamodule: sentinel2_60m
 datamodule_params:
-  length: 400
+  length: 900
 seed: 3
 trainer_params:
   patience: 5
