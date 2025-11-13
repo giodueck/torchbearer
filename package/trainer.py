@@ -16,6 +16,8 @@ if __name__ == "__main__":
     else:
         configs = configparser.parseConfig(argv[1])
 
+    global_start = time.perf_counter()
+
     for conf in configs:
         logger = TensorBoardLogger('data/logs')
 
@@ -63,7 +65,11 @@ if __name__ == "__main__":
             trainer.fit(model, datamodule=datamodule)
             trainer.test(model, datamodule=datamodule)
         except Exception as e:
-            print(f'==> Exception when running experiment version {logger.version}: {e}')
+            print(f'==> Exception when running experiment version {
+                  logger.version}: {e}')
 
         duration = time.perf_counter() - start_time
-        print(f'=> Experiment {logger.version} took {duration}s')
+        print(f'==> Experiment {logger.version} took {duration}s')
+
+    global_duration = time.perf_counter() - global_start
+    print(f'=> Total runtime: {global_duration}s')
