@@ -2,17 +2,14 @@ import lightning.pytorch as pl
 from lightning.pytorch.loggers import TensorBoardLogger
 from lightning.pytorch.callbacks import EarlyStopping, ModelCheckpoint
 
-from .datamodules import Sentinel2_60mDataModule
-from .config.products import PRODUCTS
-from .models import UNet
+from . import datamodules
+from . import models
 
 if __name__ == "__main__":
     pl.seed_everything(3)
-    datamodule = Sentinel2_60mDataModule(batch_size=3, patch_size=128, length=900,
-                                         num_workers=6, sentinel_path='data',
-                                         sentinel_products=PRODUCTS, mask_path='masks')
+    datamodule = datamodules.createSentinel2_60mDataModule()
 
-    model = UNet(in_channels=11, out_channels=1, lr=1e-4)
+    model = models.createUnet()
 
     logger = TensorBoardLogger('data/logs')
     early_stopping = EarlyStopping(monitor='val_loss', patience=7, mode='min')

@@ -1,10 +1,10 @@
 import torch
 import lightning.pytorch as pl
 from torchgeo.datasets import unbind_samples
-from .datamodules import Sentinel2_60mDataModule
-from .models import UNet
-from .config.products import PRODUCTS
 from sys import argv
+
+from . import datamodules
+from . import models
 
 
 if __name__ == "__main__":
@@ -14,9 +14,7 @@ if __name__ == "__main__":
         do_predict = False
 
     pl.seed_everything(3)
-    datamodule = Sentinel2_60mDataModule(batch_size=3, patch_size=128, length=900,
-                                         num_workers=6, sentinel_path='data',
-                                         sentinel_products=PRODUCTS, mask_path='masks')
+    datamodule = datamodules.createSentinel2_60mDataModule()
 
     # Plot sample testing images
     datamodule.prepare_data()
@@ -26,7 +24,7 @@ if __name__ == "__main__":
         checkpoint = argv[1]
         hparams_file = argv[2]
         plot_count = int(argv[3])
-        model = UNet.load_from_checkpoint(argv[1], hparams_file=hparams_file)
+        model = models.UNet.load_from_checkpoint(argv[1], hparams_file=hparams_file)
 
     for i, batch in enumerate(datamodule.test_dataloader()):
         if i == 0:

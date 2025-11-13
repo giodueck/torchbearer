@@ -101,3 +101,11 @@ class UNet(pl.LightningModule):
 
     def configure_optimizers(self):
         return torch.optim.AdamW(self.parameters(), lr=self.lr, weight_decay=1e-4)
+
+
+def createUnet(in_channels=11):
+    """
+    Returns a configured UNet
+    """
+    model = UNet(in_channels=11, out_channels=1, lr=1e-4)
+    return model

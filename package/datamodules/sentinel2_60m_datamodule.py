@@ -102,3 +102,13 @@ class Sentinel2_60mDataModule(GeoDataModule):
         else:
             plt.show()
         plt.close(figure)
+
+
+def createSentinel2_60mDataModule():
+    """
+    Returns a configured Sentinel2_60mDataModule
+    """
+    datamodule = Sentinel2_60mDataModule(batch_size=3, patch_size=128, length=900,
+                                         num_workers=6, sentinel_path='data',
+                                         sentinel_products=PRODUCTS, mask_path='masks')
+    return datamodule

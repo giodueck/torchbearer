@@ -7,7 +7,7 @@ Scheduler/task manager for running Pytorch model training unattended
 
 ## Building the container
 ```sh
-docker build . -t torchbearer:0.0.0
+docker build . -t torchbearer:0.2.0
 ```
 
 ## Running the training
@@ -23,7 +23,7 @@ docker run -ti \
     -v $PWD/masks:/workdir/masks \
     -v $PWD/package:/workdir/package \
     --gpus all \
-    torchbearer:0.0.0 \
+    torchbearer:0.2.0 \
     python -m package.trainer
 ```
 
@@ -35,7 +35,7 @@ docker run -ti \
     -v $PWD/masks:/workdir/masks \
     -v $PWD/package:/workdir/package \
     --gpus all \
-    torchbearer:0.0.0 \
+    torchbearer:0.2.0 \
     python -m package.plotter path/to/checkpoint.ckpt path/to/hparams.yaml <number of plots to generate>
 ```
 
