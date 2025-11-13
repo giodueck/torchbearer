@@ -103,9 +103,16 @@ class UNet(pl.LightningModule):
         return torch.optim.AdamW(self.parameters(), lr=self.lr, weight_decay=1e-4)
 
 
-def createUnet(in_channels=11):
+def createUnet(params: dict):
     """
-    Returns a configured UNet
+    Returns a configured UNet.
+
+    If params contains a parameter for UNet, it is used, otherwise it is set to
+    a default value. Inexistant parameters are ignored.
     """
-    model = UNet(in_channels=11, out_channels=1, lr=1e-4)
+    model = UNet(
+        in_channels=params.get('in_channels', 11),
+        out_channels=params.get('out_channels', 1),
+        features=params.get('features', [64, 128, 256, 512]),
+        lr=params.get('lr', 1e-4))
     return model

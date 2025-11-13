@@ -104,11 +104,19 @@ class Sentinel2_60mDataModule(GeoDataModule):
         plt.close(figure)
 
 
-def createSentinel2_60mDataModule():
+def createSentinel2_60mDataModule(params: dict):
     """
-    Returns a configured Sentinel2_60mDataModule
+    Returns a configured Sentinel2_60mDataModule.
+
+    If params contains a parameter for Sentinel2_60mDataModule, it is used,
+    otherwise it is set to a default value. Inexistant parameters are ignored.
     """
-    datamodule = Sentinel2_60mDataModule(batch_size=3, patch_size=128, length=900,
-                                         num_workers=6, sentinel_path='data',
-                                         sentinel_products=PRODUCTS, mask_path='masks')
+    datamodule = Sentinel2_60mDataModule(
+        batch_size=params.get('batch_size', 3),
+        patch_size=params.get('patch_size', 128),
+        length=params.get('length', 800),
+        num_workers=params.get('num_workers', 6),
+        sentinel_path=params.get('sentinel_path', 'data'),
+        sentinel_products=params.get('sentinel_products', PRODUCTS),
+        mask_path=params.get('mask_path', 'masks'))
     return datamodule

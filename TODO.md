@@ -24,22 +24,22 @@
         Validation loss seems to behave, check result with plot of output compared to image and mask
     - [ ] Fully convolutional network
     - [ ] Try torchgeo modules
-- [ ] Generic trainer:
+- [x] Generic trainer:
     - Should be able to take in a lightning module and training hyperparameters
-- [ ] Training queue
+- [x] Training queue
     - Pass a list of settings and run training loops in sequence
 - [ ] Add segmentation accuracy metric
 - [ ] Add a profiler
-- [ ] Generate masks for entire tiles by collaging predictions
+- [ ] Generate predicted masks for entire tiles by collaging predictions
 
 ## Next
 ### Need
 - Generic trainer
-    - Set job with a config file
+    - [x] Set job with a config file
 - Training queue
-    - Set a number of training rounds to run in sequence
-    - Properly log which versions correspond to which job
+    - [x] Set a number of training rounds to run in sequence
+    - [ ] Properly log which versions correspond to which job
 ### Want
-- Add a profiler
-- Generate masks for entire tiles by collaging predictions
-- Revisit tiles with results of previous experiments to refine masks
+- [ ] Add a profiler
+- [ ] Generate predicted masks for entire tiles by collaging predictions
+- [ ] Revisit tiles with results of previous experiments to refine masks

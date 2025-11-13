@@ -1,0 +1,16 @@
+model: unet
+model_params:
+  in_channels: 11
+  features:
+    - 64
+    - 128
+    - 256
+    - 512
+datamodule: sentinel2_60m
+datamodule_params:
+  length: 400
+seed: 3
+trainer_params:
+  patience: 5
+  save_top_k: 1
+  max_epochs: 20

@@ -5,6 +5,7 @@ from sys import argv
 
 from . import datamodules
 from . import models
+from .config import configparser
 
 
 if __name__ == "__main__":
@@ -13,8 +14,19 @@ if __name__ == "__main__":
     else:
         do_predict = False
 
-    pl.seed_everything(3)
-    datamodule = datamodules.createSentinel2_60mDataModule()
+    # Also only relevant when do_predict == True
+    default_config = configparser.defaultConfig()[0]
+    if len(argv) == 5:
+        configs = configparser.defaultConfig()
+    else:
+        configs = configparser.parseConfig(argv[5])
+
+    # This is meant as a quick plotting/debugging script, so only do the first config
+    conf = configs[0]
+
+    pl.seed_everything(conf.get('seed', default_config['seed']))
+    datamodule = datamodules.datamodules[conf.get(
+        'datamodule', default_config['datamodule'])](conf.get('datamodule_params', {}))
 
     # Plot sample testing images
     datamodule.prepare_data()

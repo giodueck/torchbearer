@@ -2,6 +2,10 @@
 
 ## [0.2.0] - 2025-11-12
 
+### Added
+
+- Configuration parser to run sequential training jobs
+
 ### Changed
 
 - Moved DataModule and LightningModule creation out of the trainer script

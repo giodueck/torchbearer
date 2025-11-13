@@ -1,0 +1,18 @@
+- model: unet
+  model_params:
+    in_channels: 11
+  datamodule: sentinel2_60m
+  datamodule_params: {}
+  seed: 3
+- model: unet
+  model_params:
+    in_channels: 6
+  datamodule: sentinel2_60m
+  datamodule_params: {}
+  seed: 21
+- model: unet
+  model_params:
+    in_channels: 3
+  datamodule: sentinel2_60m
+  datamodule_params: {}
+  seed: 42

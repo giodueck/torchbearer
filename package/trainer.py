@@ -1,22 +1,56 @@
 import lightning.pytorch as pl
 from lightning.pytorch.loggers import TensorBoardLogger
 from lightning.pytorch.callbacks import EarlyStopping, ModelCheckpoint
+from sys import argv
 
 from . import datamodules
 from . import models
+from .config import configparser
 
 if __name__ == "__main__":
-    pl.seed_everything(3)
-    datamodule = datamodules.createSentinel2_60mDataModule()
+    default_config = configparser.defaultConfig()[0]
+    if len(argv) == 1:
+        configs = configparser.defaultConfig()
+    else:
+        configs = configparser.parseConfig(argv[1])
 
-    model = models.createUnet()
+    for conf in configs:
+        pl.seed_everything(conf.get('seed', default_config['seed']))
 
-    logger = TensorBoardLogger('data/logs')
-    early_stopping = EarlyStopping(monitor='val_loss', patience=7, mode='min')
-    model_checkpoint = ModelCheckpoint(monitor='val_loss', save_top_k=1, mode='min')
+        datamodule = datamodules.datamodules[conf.get(
+            'datamodule', default_config['datamodule'])](conf.get('datamodule_params', {}))
 
-    trainer = pl.Trainer(min_epochs=1, max_epochs=50, log_every_n_steps=8,
-                         logger=logger, callbacks=[early_stopping, model_checkpoint])
+        model = models.models[conf.get('model', default_config['model'])](
+            conf.get('model_params', {}))
 
-    trainer.fit(model, datamodule=datamodule)
-    trainer.test(model, datamodule=datamodule)
+        trainer_params = conf.get(
+            'trainer_params', default_config['trainer_params'])
+        default_trainer_params = default_config['trainer_params']
+
+        logger = TensorBoardLogger('data/logs')
+        early_stopping = EarlyStopping(
+            monitor='val_loss',
+            mode='min',
+            patience=trainer_params.get(
+                'patience', default_trainer_params['patience']),
+        )
+        model_checkpoint = ModelCheckpoint(
+            monitor='val_loss',
+            mode='min',
+            save_top_k=trainer_params.get(
+                'save_top_k', default_trainer_params['save_top_k']),
+        )
+
+        trainer = pl.Trainer(
+            min_epochs=trainer_params.get(
+                'min_epochs', default_trainer_params['min_epochs']),
+            max_epochs=trainer_params.get(
+                'max_epochs', default_trainer_params['max_epochs']),
+            log_every_n_steps=trainer_params.get(
+                'log_every_n_steps', default_trainer_params['log_every_n_steps']),
+            logger=logger,
+            callbacks=[early_stopping, model_checkpoint]
+        )
+
+        trainer.fit(model, datamodule=datamodule)
+        trainer.test(model, datamodule=datamodule)
