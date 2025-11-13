@@ -27,6 +27,7 @@
 - [x] Generic trainer:
     Should be able to take in a lightning module and training hyperparameters
     - [x] Set job with a config file
+    - [ ] Output summary of all models trained and test performance
 - [x] Training queue
     - Pass a list of settings and run training loops in sequence
 - [ ] Add segmentation accuracy metric
@@ -50,3 +51,5 @@
 - [ ] Generate predicted masks for entire tiles by collaging predictions
 - [ ] Revisit tiles with results of previous experiments to refine masks
 - [ ] Add segmentation accuracy metric
+- Generic trainer
+    - [ ] Output summary of all models trained and test performance
