@@ -19,9 +19,9 @@
         - expand
     - [ ] Revisit tiles with results of previous experiments to refine masks
 - [x] Sentinel-2 datamodule
+    - [x] Dataset configurations, e.g. number and selection of bands
 - Segmentation models
     - [x] UNet
-        Validation loss seems to behave, check result with plot of output compared to image and mask
     - [ ] Fully convolutional network
     - [ ] Try torchgeo modules
 - [x] Generic trainer:
@@ -46,6 +46,8 @@
 - Training queue
     - [x] Set a number of training rounds to run in sequence
     - [x] Properly log which versions correspond to which job
+- Sentinel-2 datamodule
+    - [x] Dataset configurations, e.g. number and selection of bands
 ### Want
 - [ ] Add a profiler
 - [ ] Generate predicted masks for entire tiles by collaging predictions

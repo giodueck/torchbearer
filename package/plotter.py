@@ -16,10 +16,10 @@ if __name__ == "__main__":
 
     # Also only relevant when do_predict == True
     default_config = configparser.defaultConfig()[0]
-    if len(argv) == 5:
-        configs = configparser.defaultConfig()
+    if len(argv) >= 5:
+        configs = configparser.parseConfig(argv[4])
     else:
-        configs = configparser.parseConfig(argv[5])
+        configs = configparser.defaultConfig()
 
     # This is meant as a quick plotting/debugging script, so only do the first config
     conf = configs[0]

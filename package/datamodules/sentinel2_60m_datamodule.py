@@ -10,10 +10,21 @@ from torchgeo.samplers.utils import _to_tuple
 from torchgeo.samplers import RandomBatchGeoSampler, GridGeoSampler, RandomGeoSampler
 import matplotlib.pyplot as plt
 import os
+from typing import Sequence
 
 
 class Sentinel2_60mDataModule(GeoDataModule):
-    def __init__(self, batch_size=16, patch_size=64, length=None, num_workers=0, sentinel_path='data', sentinel_products=PRODUCTS, mask_path='masks'):
+    def __init__(
+        self,
+        batch_size=16,
+        patch_size=64,
+        length=None,
+        num_workers=0,
+        sentinel_path='data',
+        sentinel_products=PRODUCTS,
+        mask_path='masks',
+        bands: Sequence[str] | None = None,
+    ):
         super().__init__(IntersectionDataset, batch_size, patch_size, length, num_workers)
 
         self.train_aug = K.AugmentationSequential(
@@ -38,6 +49,7 @@ class Sentinel2_60mDataModule(GeoDataModule):
         self.sentinel_path = sentinel_path
         self.sentinel_products = sentinel_products
         self.mask_path = mask_path
+        self.bands = bands
 
     def prepare_data(self):
         """
@@ -45,7 +57,7 @@ class Sentinel2_60mDataModule(GeoDataModule):
         Can be downloading data or instead call a custom dataset from setup, skipping this step.
         """
         self.sentinel2 = Sentinel2_60m(
-            self.sentinel_path, products=self.sentinel_products)
+            self.sentinel_path, products=self.sentinel_products, bands=self.bands)
         self.label = LabelDataset(self.mask_path)
         self.dataset = self.sentinel2 & self.label
 
@@ -118,5 +130,6 @@ def createSentinel2_60mDataModule(params: dict):
         num_workers=params.get('num_workers', 6),
         sentinel_path=params.get('sentinel_path', 'data'),
         sentinel_products=params.get('sentinel_products', PRODUCTS),
-        mask_path=params.get('mask_path', 'masks'))
+        mask_path=params.get('mask_path', 'masks'),
+        bands=params.get('bands', None))
     return datamodule
