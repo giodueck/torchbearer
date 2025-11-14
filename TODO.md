@@ -44,19 +44,12 @@
 
 ## Next
 ### Need
-- Generic trainer
-    - [x] Set job with a config file
-- Training queue
-    - [x] Set a number of training rounds to run in sequence
-    - [x] Properly log which versions correspond to which job
-- Sentinel-2 datamodule
-    - [x] Dataset configurations, e.g. number and selection of bands
+
 ### Want
 - [ ] Add a profiler
 - [ ] Generate predicted masks for entire tiles by collaging predictions
 - [ ] Revisit tiles with results of previous experiments to refine masks
 - [ ] Add segmentation accuracy metric
 - Generic trainer
-    - [x] Output model config into logs directory
     - [ ] Output summary of all models trained and test performance
         Optional since this can also be viewed in TensorBoard

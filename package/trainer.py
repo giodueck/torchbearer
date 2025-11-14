@@ -69,18 +69,21 @@ if __name__ == "__main__":
             with open(f'data/logs/lightning_logs/version_{logger.version}/config.yaml', 'wt') as cfg:
                 yaml.safe_dump(conf, cfg)
 
-            # Clean up and free CUDA memory
-            del trainer
-            del model
-            del datamodule
-            torch.cuda.empty_cache()
-
         except Exception as e:
             print(f'==> Exception when running experiment version {
                   logger.version}: {e}')
 
         duration = time.perf_counter() - start_time
         print(f'==> Experiment {logger.version} took {duration}s')
+
+        # Clean up and free CUDA memory
+        del trainer
+        del model
+        del datamodule.dataset
+        del datamodule
+        torch.cuda.empty_cache()
+        torch.cuda.ipc_collect()
+        pl.utilities.memory.garbage_collection_cuda()
 
     global_duration = time.perf_counter() - global_start
     print(f'=> Total runtime: {global_duration}s')

@@ -78,3 +78,6 @@ However, the results look blurrier and less precise than what the UNets produce
 
 ## Comparison between band usages
 Compare versions 101 and 102
+
+## Comparison between UNet feature sets
+Compare versions 106, 107

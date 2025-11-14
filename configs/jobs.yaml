@@ -1,6 +1,25 @@
 - model: unet
   model_params:
-    in_channels: 6
+    in_channels: 11
+    features:
+      - 32
+      - 64
+      - 128
+      - 256
+      - 512
+    lr: 0.0001
+  datamodule: sentinel2_60m
+  datamodule_params:
+    length: 800
+    batch_size: 3
+  seed: 3
+  trainer_params:
+    patience: 7
+    save_top_k: 1
+    max_epochs: 1
+- model: unet
+  model_params:
+    in_channels: 11
     features:
       - 64
       - 128
@@ -10,15 +29,28 @@
     lr: 0.0001
   datamodule: sentinel2_60m
   datamodule_params:
-    length: 1200
-    batch_size: 4
-    bands:
-      - B02
-      - B03
-      - B04
-      - B05
-      - B06
-      - B07
+    length: 800
+    batch_size: 3
+  seed: 3
+  trainer_params:
+    patience: 7
+    save_top_k: 1
+    max_epochs: 1
+- model: unet
+  model_params:
+    in_channels: 11
+    features:
+      - 32
+      - 64
+      - 128
+      - 256
+      - 512
+      - 1024
+    lr: 0.0001
+  datamodule: sentinel2_60m
+  datamodule_params:
+    length: 800
+    batch_size: 3
   seed: 3
   trainer_params:
     patience: 7
