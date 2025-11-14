@@ -70,10 +70,10 @@ if __name__ == "__main__":
                 yaml.safe_dump(conf, cfg)
 
             # Clean up and free CUDA memory
-            torch.cuda.empty_cache()
             del trainer
             del model
             del datamodule
+            torch.cuda.empty_cache()
 
         except Exception as e:
             print(f'==> Exception when running experiment version {
