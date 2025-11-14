@@ -59,3 +59,4 @@
 - Generic trainer
     - [x] Output model config into logs directory
     - [ ] Output summary of all models trained and test performance
+        Optional since this can also be viewed in TensorBoard
