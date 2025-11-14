@@ -15,9 +15,10 @@
     - Tiles:
         - [x] T20KNA
         - [x] T20KNB
-        - [ ] T20KPC
+        - [x] T20KPC
         - expand
     - [ ] Revisit tiles with results of previous experiments to refine masks
+        Somewhat unnecessary with UNets as they tend to result in refined predictions anyways
 - [x] Sentinel-2 datamodule
     - [x] Dataset configurations, e.g. number and selection of bands
 - Segmentation models
@@ -27,8 +28,8 @@
 - [x] Generic trainer:
     Should be able to take in a lightning module and training hyperparameters
     - [x] Set job with a config file
+    - [x] Output model config into logs directory
     - [ ] Output summary of all models trained and test performance
-    - [ ] Output model config into logs directory
 - [x] Training queue
     - Pass a list of settings and run training loops in sequence
 - [ ] Add segmentation accuracy metric
@@ -56,4 +57,5 @@
 - [ ] Revisit tiles with results of previous experiments to refine masks
 - [ ] Add segmentation accuracy metric
 - Generic trainer
+    - [x] Output model config into logs directory
     - [ ] Output summary of all models trained and test performance

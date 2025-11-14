@@ -64,6 +64,10 @@ if __name__ == "__main__":
 
             trainer.fit(model, datamodule=datamodule)
             trainer.test(model, datamodule=datamodule)
+
+            with open(f'data/logs/lightning_logs/version_{logger.version}/config.yaml', 'wt') as cfg:
+                yaml.safe_dump(conf, cfg)
+
         except Exception as e:
             print(f'==> Exception when running experiment version {
                   logger.version}: {e}')
