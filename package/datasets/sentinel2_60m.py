@@ -128,7 +128,7 @@ class Sentinel2_60m(RasterDataset):
         # Find the correct band index order
         rgb_indices = []
         for band in self.rgb_bands:
-            rgb_indices.append(self.all_bands.index(band))
+            rgb_indices.append(self.bands.index(band))
 
         # Reorder and rescale the image
         image = sample['image'][rgb_indices].permute(1, 2, 0)

@@ -28,6 +28,7 @@
     Should be able to take in a lightning module and training hyperparameters
     - [x] Set job with a config file
     - [ ] Output summary of all models trained and test performance
+    - [ ] Output model config into logs directory
 - [x] Training queue
     - Pass a list of settings and run training loops in sequence
 - [ ] Add segmentation accuracy metric
@@ -38,6 +39,7 @@
     - Pytorch
     - Pytorch lightning
     - Torchgeo
+    - FarSeg: https://arxiv.org/pdf/2011.09766
 
 ## Next
 ### Need

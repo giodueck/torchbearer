@@ -1,15 +1,15 @@
-from torchgeo.models import FCN
+from torchgeo.models import FarSeg
 import lightning.pytorch as pl
 import torch
 import torch.nn as nn
 
 
-class FCNLightningModule(pl.LightningModule):
-    def __init__(self, in_channels=11, num_filters=64, lr=1e-4):
+class FarSegLightningModule(pl.LightningModule):
+    def __init__(self, backbone='resnet50', backbone_pretrained=True, lr=1e-4):
         super().__init__()
         self.save_hyperparameters()
-        self.model = FCN(in_channels=in_channels,
-                         classes=1, num_filters=num_filters)
+        self.model = FarSeg(backbone=backbone, classes=1,
+                            backbone_pretrained=backbone_pretrained)
         self.lr = lr
         self.loss_fn = nn.BCEWithLogitsLoss()
 
@@ -48,10 +48,10 @@ class FCNLightningModule(pl.LightningModule):
         return torch.optim.AdamW(self.parameters(), lr=self.lr, weight_decay=1e-4)
 
 
-def createFCN(params: dict):
-    model = FCNLightningModule(
-        in_channels=params.get('in_channels', 11),
-        num_filters=params.get('num_filters', 64),
+def createFarSeg(params: dict):
+    model = FarSegLightningModule(
+        backbone=params.get('backbone', 'resnet50'),
+        backbone_pretrained=params.get('backbone_pretrained', True),
         lr=params.get('lr', 1e-4),
     )
     return model

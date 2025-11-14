@@ -1,11 +1,15 @@
-- model: fcn
+- model: farseg
   model_params:
-    in_channels: 11
-    classes: 1
+    backbone: resnet50
+    backbone_pretrained: false
   datamodule: sentinel2_60m
   datamodule_params:
     length: 1200
-    batch_size: 3
+    batch_size: 8
+    bands:
+      - B04
+      - B03
+      - B02
   seed: 42
   trainer_params:
     patience: 7
