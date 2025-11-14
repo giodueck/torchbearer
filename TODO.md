@@ -22,8 +22,8 @@
     - [x] Dataset configurations, e.g. number and selection of bands
 - Segmentation models
     - [x] UNet
-    - [ ] Fully convolutional network
-    - [ ] Try torchgeo modules
+    - Try torchgeo modules
+        - [x] Fully convolutional network
 - [x] Generic trainer:
     Should be able to take in a lightning module and training hyperparameters
     - [x] Set job with a config file

@@ -36,7 +36,8 @@ if __name__ == "__main__":
         checkpoint = argv[1]
         hparams_file = argv[2]
         plot_count = int(argv[3])
-        model = models.UNet.load_from_checkpoint(argv[1], hparams_file=hparams_file)
+        model = models.model_classes[conf.get('model', default_config['model'])].load_from_checkpoint(
+            argv[1], hparams_file=hparams_file)
 
     for i, batch in enumerate(datamodule.test_dataloader()):
         if i == 0:

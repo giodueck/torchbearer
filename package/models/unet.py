@@ -1,8 +1,6 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 import lightning.pytorch as pl
-import numpy as np
 
 
 class DoubleConv(nn.Module):
@@ -114,5 +112,6 @@ def createUnet(params: dict):
         in_channels=params.get('in_channels', 11),
         out_channels=params.get('out_channels', 1),
         features=params.get('features', [64, 128, 256, 512]),
-        lr=params.get('lr', 1e-4))
+        lr=params.get('lr', 1e-4),
+    )
     return model

@@ -23,3 +23,29 @@
 ```
 
 Test loss: 0.3550446033477783
+
+## Version 74
+
+```yaml
+- model: unet
+  model_params:
+    in_channels: 11
+    features:
+      - 32
+      - 64
+      - 128
+      - 256
+      - 512
+    lr: 0.0001
+  datamodule: sentinel2_60m
+  datamodule_params:
+    length: 1200
+    batch_size: 3
+  seed: 42
+  trainer_params:
+    patience: 7
+    save_top_k: 1
+    max_epochs: 50
+```
+
+Test loss: 0.3845057189464569
