@@ -1,3 +1,4 @@
+import torch
 import lightning.pytorch as pl
 from lightning.pytorch.loggers import TensorBoardLogger
 from lightning.pytorch.callbacks import EarlyStopping, ModelCheckpoint
@@ -67,6 +68,12 @@ if __name__ == "__main__":
 
             with open(f'data/logs/lightning_logs/version_{logger.version}/config.yaml', 'wt') as cfg:
                 yaml.safe_dump(conf, cfg)
+
+            # Clean up and free CUDA memory
+            torch.cuda.empty_cache()
+            del trainer
+            del model
+            del datamodule
 
         except Exception as e:
             print(f'==> Exception when running experiment version {

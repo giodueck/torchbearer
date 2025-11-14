@@ -18,6 +18,7 @@
 ### Fixed
 
 - Plotter indexing fixed for some cases in which not all bands are used
+- Free up memory after each training round to avoid CUDA out of memory errors
 
 ## [0.1.0] - 2025-11-09
 
