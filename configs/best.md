@@ -75,3 +75,6 @@ Test loss: 0.3845057189464569
 Test loss: 0.3218611776828766
 
 However, the results look blurrier and less precise than what the UNets produce
+
+## Comparison between band usages
+Compare versions 101 and 102

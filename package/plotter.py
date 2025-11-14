@@ -2,6 +2,7 @@ import torch
 import lightning.pytorch as pl
 from torchgeo.datasets import unbind_samples
 from sys import argv
+import pathlib
 
 from . import datamodules
 from . import models
@@ -16,13 +17,18 @@ if __name__ == "__main__":
 
     # Also only relevant when do_predict == True
     default_config = configparser.defaultConfig()[0]
-    if len(argv) >= 5:
-        configs = configparser.parseConfig(argv[4])
-    else:
-        configs = configparser.defaultConfig()
 
-    # This is meant as a quick plotting/debugging script, so only do the first config
-    conf = configs[0]
+    if do_predict:
+        checkpoint = argv[1]
+        path = pathlib.PosixPath(argv[2])
+        hparams_file = path / "hparams.yaml"
+        config_file = path / "config.yaml"
+        conf = configparser.parseConfig(config_file)[0]
+        plot_count = int(argv[3])
+        model = models.model_classes[conf.get('model', default_config['model'])].load_from_checkpoint(
+            argv[1], hparams_file=hparams_file)
+    else:
+        conf = default_config
 
     pl.seed_everything(conf.get('seed', default_config['seed']))
     datamodule = datamodules.datamodules[conf.get(
@@ -31,13 +37,6 @@ if __name__ == "__main__":
     # Plot sample testing images
     datamodule.prepare_data()
     datamodule.setup('test')
-
-    if do_predict:
-        checkpoint = argv[1]
-        hparams_file = argv[2]
-        plot_count = int(argv[3])
-        model = models.model_classes[conf.get('model', default_config['model'])].load_from_checkpoint(
-            argv[1], hparams_file=hparams_file)
 
     for i, batch in enumerate(datamodule.test_dataloader()):
         if i == 0:

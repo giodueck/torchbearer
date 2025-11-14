@@ -7,13 +7,14 @@
 - Configuration parser to run sequential training jobs
 - Some logging for each trainer run
 - Trainer now takes a job config as an argument
-- Plotter now takes a job config along with the previous arguments
 - Add Fully-Convolutional Network as a model option
 - Add FarSeg as a model option
+- The used job config is now output to the logs directory of a version
 
 ### Changed
 
 - Moved DataModule and LightningModule creation out of the trainer script
+- Simplify plotter arguments
 
 ### Fixed
 
