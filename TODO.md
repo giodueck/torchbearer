@@ -44,10 +44,11 @@
 
 ## Next
 ### Need
+- [ ] Generate predicted masks for entire tiles by collaging predictions
+- [ ] Run inference on tiles that were not used in training. Separate datamodule?
 
 ### Want
 - [ ] Add a profiler
-- [ ] Generate predicted masks for entire tiles by collaging predictions
 - [ ] Revisit tiles with results of previous experiments to refine masks
 - [ ] Add segmentation accuracy metric
 - Generic trainer
