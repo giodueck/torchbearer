@@ -17,6 +17,12 @@ if __name__ == "__main__":
     else:
         configs = configparser.parseConfig(argv[1])
 
+    # Merge loaded configs into the default config
+    # Last dict merged in gets priority
+    for i, config in enumerate(configs):
+        configs[i] = default_config | config
+        configs[i]['trainer_params'] = default_config['trainer_params'] | configs[i]['trainer_params']
+
     global_start = time.perf_counter()
 
     for conf in configs:
@@ -27,38 +33,30 @@ if __name__ == "__main__":
         start_time = time.perf_counter()
 
         try:
-            pl.seed_everything(conf.get('seed', default_config['seed']))
+            pl.seed_everything(conf['seed'])
 
-            datamodule = datamodules.datamodules[conf.get(
-                'datamodule', default_config['datamodule'])](conf.get('datamodule_params', {}))
+            datamodule = datamodules.datamodules[conf['datamodule']](
+                conf['datamodule_params'])
 
-            model = models.models[conf.get('model', default_config['model'])](
-                conf.get('model_params', {}))
+            model = models.models[conf['model']](conf['model_params'])
 
-            trainer_params = conf.get(
-                'trainer_params', default_config['trainer_params'])
-            default_trainer_params = default_config['trainer_params']
+            trainer_params = conf['trainer_params']
 
             early_stopping = EarlyStopping(
                 monitor='val_loss',
                 mode='min',
-                patience=trainer_params.get(
-                    'patience', default_trainer_params['patience']),
+                patience=trainer_params['patience'],
             )
             model_checkpoint = ModelCheckpoint(
                 monitor='val_loss',
                 mode='min',
-                save_top_k=trainer_params.get(
-                    'save_top_k', default_trainer_params['save_top_k']),
+                save_top_k=trainer_params['save_top_k'],
             )
 
             trainer = pl.Trainer(
-                min_epochs=trainer_params.get(
-                    'min_epochs', default_trainer_params['min_epochs']),
-                max_epochs=trainer_params.get(
-                    'max_epochs', default_trainer_params['max_epochs']),
-                log_every_n_steps=trainer_params.get(
-                    'log_every_n_steps', default_trainer_params['log_every_n_steps']),
+                min_epochs=trainer_params['min_epochs'],
+                max_epochs=trainer_params['max_epochs'],
+                log_every_n_steps=trainer_params['log_every_n_steps'],
                 logger=logger,
                 callbacks=[early_stopping, model_checkpoint]
             )

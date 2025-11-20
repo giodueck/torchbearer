@@ -23,16 +23,15 @@ if __name__ == "__main__":
         path = pathlib.PosixPath(argv[2])
         hparams_file = path / "hparams.yaml"
         config_file = path / "config.yaml"
-        conf = configparser.parseConfig(config_file)[0]
+        conf = default_config | configparser.parseConfig(config_file)[0]
         plot_count = int(argv[3])
-        model = models.model_classes[conf.get('model', default_config['model'])].load_from_checkpoint(
+        model = models.model_classes[conf['model']].load_from_checkpoint(
             argv[1], hparams_file=hparams_file)
     else:
         conf = default_config
 
-    pl.seed_everything(conf.get('seed', default_config['seed']))
-    datamodule = datamodules.datamodules[conf.get(
-        'datamodule', default_config['datamodule'])](conf.get('datamodule_params', {}))
+    pl.seed_everything(conf['seed'])
+    datamodule = datamodules.datamodules[conf['datamodule']](conf['datamodule_params'])
 
     # Plot sample testing images
     datamodule.prepare_data()
