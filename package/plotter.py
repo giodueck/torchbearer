@@ -27,6 +27,11 @@ if __name__ == "__main__":
         plot_count = int(argv[3])
         model = models.model_classes[conf['model']].load_from_checkpoint(
             argv[1], hparams_file=hparams_file)
+
+        # For overrides of e.g. the dataset to plot
+        # Should be compatible with original model, of course
+        if len(argv) > 4:
+            conf |= configparser.parseConfig(argv[4])[0]
     else:
         conf = default_config
 

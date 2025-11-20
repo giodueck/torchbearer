@@ -21,7 +21,7 @@ class Sentinel2_60mDataModule(GeoDataModule):
         length=None,
         num_workers=0,
         sentinel_path='data',
-        sentinel_products=PRODUCTS,
+        sentinel_products: str = 'train',
         mask_path='masks',
         bands: Sequence[str] | None = None,
     ):
@@ -57,9 +57,13 @@ class Sentinel2_60mDataModule(GeoDataModule):
         Can be downloading data or instead call a custom dataset from setup, skipping this step.
         """
         self.sentinel2 = Sentinel2_60m(
-            self.sentinel_path, products=self.sentinel_products, bands=self.bands)
-        self.label = LabelDataset(self.mask_path)
-        self.dataset = self.sentinel2 & self.label
+            self.sentinel_path, products=PRODUCTS[self.sentinel_products], bands=self.bands)
+        if self.mask_path is not None:
+            self.label = LabelDataset(self.mask_path)
+            self.dataset = self.sentinel2 & self.label
+        else:
+            self.label = None
+            self.dataset = self.sentinel2
 
     def setup(self, stage: str):
         """
@@ -100,7 +104,8 @@ class Sentinel2_60mDataModule(GeoDataModule):
 
         plt.axis('on')
         img_fig = self.sentinel2.plot(sample, axes[0])
-        label_fig = self.label.plot(sample, axes[1])
+        if self.mask_path is not None:
+            label_fig = self.label.plot(sample, axes[1])
         if 'output' in sample.keys():
             output = sample['output'].cpu().squeeze()
             output_fig = axes[2].imshow(output, cmap='Blues')
@@ -129,7 +134,7 @@ def createSentinel2_60mDataModule(params: dict):
         length=params.get('length', 800),
         num_workers=params.get('num_workers', 6),
         sentinel_path=params.get('sentinel_path', 'data'),
-        sentinel_products=params.get('sentinel_products', PRODUCTS),
+        sentinel_products=params.get('sentinel_products', 'train'),
         mask_path=params.get('mask_path', 'masks'),
         bands=params.get('bands', None))
     return datamodule
