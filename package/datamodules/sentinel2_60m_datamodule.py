@@ -72,7 +72,7 @@ class Sentinel2_60mDataModule(GeoDataModule):
         generator = torch.Generator().manual_seed(torch.Generator().initial_seed())
 
         self.train_dataset, self.val_dataset, self.test_dataset = random_grid_cell_assignment(
-            self.dataset, [0.7, 0.2, 0.1], grid_size=8, generator=generator)
+            self.dataset, [0.7, 0.2, 0.1], grid_size=6, generator=generator)
 
         if self.mask_path is None:
             self.test_dataset = self.dataset

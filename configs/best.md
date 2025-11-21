@@ -174,3 +174,97 @@ Also horrible test loss, but plots showed a more blobby prediction pattern and l
 ```
 
 A bigger epoch helped keep learning a little bit more stable.
+
+## Adjustment to dataset random grid cell assignment
+Changing the grid_size from 8 to 6 (so 6 cells wide instead of 8) allows for more validation and testing batches (more non-overlapping samples can be taken from each grid).
+
+This resulted in the lowest test loss results yet.
+
+### Version 129
+```yaml
+datamodule: sentinel2_60m
+datamodule_params:
+  batch_size: 3
+  length: 1200
+model: unet
+model_params:
+  features:
+  - 32
+  - 64
+  - 128
+  - 256
+  - 512
+  in_channels: 11
+  lr: 0.0001
+  weight_decay: 0.0001
+seed: 42
+trainer_params:
+  log_every_n_steps: 8
+  max_epochs: 50
+  min_epochs: 1
+  patience: 7
+  save_top_k: 1
+```
+
+Test loss: 0.27345722913742065
+
+Pretty impressive test dataset performance, although some spots consistently predicted by previous models were missed.
+
+### Version 130
+```yaml
+datamodule: sentinel2_60m
+datamodule_params:
+  batch_size: 3
+  length: 1200
+model: unet
+model_params:
+  features:
+  - 64
+  - 128
+  - 256
+  - 512
+  in_channels: 11
+  lr: 0.0001
+  weight_decay: 0.0001
+seed: 42
+trainer_params:
+  log_every_n_steps: 8
+  max_epochs: 50
+  min_epochs: 1
+  patience: 7
+  save_top_k: 1
+```
+
+Test loss: 0.21922406554222107
+
+Better and more confident test dataset predictions than the previous version.
+
+### Version 131
+```yaml
+datamodule: sentinel2_60m
+datamodule_params:
+  batch_size: 3
+  length: 1200
+model: unet
+model_params:
+  features:
+  - 64
+  - 128
+  - 256
+  - 512
+  - 1024
+  in_channels: 11
+  lr: 0.0001
+  weight_decay: 0.0001
+seed: 42
+trainer_params:
+  log_every_n_steps: 8
+  max_epochs: 50
+  min_epochs: 1
+  patience: 7
+  save_top_k: 1
+```
+
+Test loss: 0.23361912369728088
+
+Compared to the previous versions: better consistency on the edges of the samples, but lower accuracy in prediction.

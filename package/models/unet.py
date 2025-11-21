@@ -20,7 +20,7 @@ class DoubleConv(nn.Module):
 
 
 class UNet(pl.LightningModule):
-    def __init__(self, in_channels=3, out_channels=1, features=[64, 128, 256, 512], lr=1e-4):
+    def __init__(self, in_channels=3, out_channels=1, features=[64, 128, 256, 512], lr=1e-4, weight_decay=1e-4):
         super().__init__()
         self.save_hyperparameters()
         self.downs = nn.ModuleList()
@@ -44,6 +44,7 @@ class UNet(pl.LightningModule):
         self.loss_fn = nn.BCEWithLogitsLoss()
 
         self.lr = lr
+        self.weight_decay = weight_decay
 
     def forward(self, x):
         skip_connections = []
@@ -98,7 +99,7 @@ class UNet(pl.LightningModule):
         return preds
 
     def configure_optimizers(self):
-        return torch.optim.AdamW(self.parameters(), lr=self.lr, weight_decay=1e-4)
+        return torch.optim.AdamW(self.parameters(), lr=self.lr, weight_decay=self.weight_decay)
 
 
 def createUnet(params: dict):
@@ -113,5 +114,6 @@ def createUnet(params: dict):
         out_channels=params.get('out_channels', 1),
         features=params.get('features', [64, 128, 256, 512]),
         lr=params.get('lr', 1e-4),
+        weight_decay=params.get('weight_decay', 1e-4),
     )
     return model
