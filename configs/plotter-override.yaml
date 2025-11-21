@@ -1,9 +1,5 @@
 - datamodule_params:
     length: 1200
     batch_size: 3
-    bands:
-      - B04
-      - B03
-      - B02
-    sentinel_products: 'test'
+    sentinel_products: 'train'
     mask_path: null

@@ -18,7 +18,6 @@
         - [x] T20KPC
         - expand
     - [ ] Revisit tiles with results of previous experiments to refine masks
-        Somewhat unnecessary with UNets as they tend to result in refined predictions anyways
 - [x] Sentinel-2 datamodule
     - [x] Dataset configurations, e.g. number and selection of bands
 - Segmentation models
@@ -45,7 +44,8 @@
 ## Next
 ### Need
 - [ ] Generate predicted masks for entire tiles by collaging predictions
-- [ ] Run inference on tiles that were not used in training. Separate datamodule?
+- [x] Run inference on tiles that were not used in training.
+    Different products, configurable with a job config override
 
 ### Want
 - [ ] Add a profiler

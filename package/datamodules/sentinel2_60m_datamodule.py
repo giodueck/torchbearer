@@ -74,11 +74,12 @@ class Sentinel2_60mDataModule(GeoDataModule):
         self.train_dataset, self.val_dataset, self.test_dataset = random_grid_cell_assignment(
             self.dataset, [0.7, 0.2, 0.1], grid_size=8, generator=generator)
 
+        if self.mask_path is None:
+            self.test_dataset = self.dataset
+
         if stage in ['fit']:
             self.train_batch_sampler = RandomBatchGeoSampler(
                 self.train_dataset, self.patch_size, self.batch_size, self.length)
-            self.train_sampler = RandomGeoSampler(
-                self.train_dataset, self.patch_size)
         if stage in ['fit', 'validate']:
             self.val_sampler = GridGeoSampler(
                 self.val_dataset, self.patch_size, self.patch_size)

@@ -50,7 +50,6 @@ if __name__ == "__main__":
                 image_tensor = (torch.FloatTensor(batch['image'])).to(
                     torch.device('cuda'))
                 batch['output'] = model(image_tensor)
-        # sample = unbind_samples(batch)[0]
 
         if i*batch_len >= plot_count:
             break
