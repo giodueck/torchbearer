@@ -83,6 +83,8 @@ Compare versions 101 and 102
 Compare versions 106, 107, 114
 
 ## Refined masks (paying more attention to fields with paleochannels)
+All of these versions also did decently with the test products (IMO)
+
 ### Version 115
 This one only contains the updated version of the T20KNA mask.
 
@@ -120,3 +122,55 @@ Same config as 115
 Test loss: 0.6524485349655151
 
 This looks bad, but the predictions are IMO better than 115.
+
+### Version 118
+
+```yaml
+- model: unet
+  model_params:
+    in_channels: 11
+    features:
+      - 64
+      - 128
+      - 256
+      - 512
+    lr: 0.0001
+  datamodule: sentinel2_60m
+  datamodule_params:
+    length: 900
+    batch_size: 3
+  seed: 42
+  trainer_params:
+    patience: 7
+    save_top_k: 1
+    max_epochs: 50
+```
+
+Test loss: 0.7834296226501465
+
+Also horrible test loss, but plots showed a more blobby prediction pattern and less noodle or river shaped masks generated around roads or fields.
+
+### Version 119
+
+```yaml
+- model: unet
+  model_params:
+    in_channels: 11
+    features:
+      - 64
+      - 128
+      - 256
+      - 512
+    lr: 0.0001
+  datamodule: sentinel2_60m
+  datamodule_params:
+    length: 1200
+    batch_size: 3
+  seed: 42
+  trainer_params:
+    patience: 7
+    save_top_k: 1
+    max_epochs: 50
+```
+
+A bigger epoch helped keep learning a little bit more stable.
