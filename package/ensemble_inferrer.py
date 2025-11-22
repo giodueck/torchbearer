@@ -61,7 +61,7 @@ def create_inferrence_mask(config: dict, dst_path: str):
                 shape[2])
 
             ds = create_rasterio_dataset(
-                sample['output'].cpu().numpy().squeeze().clip(0.3, 1.0),
+                sample['output'].cpu().numpy().squeeze().clip(0.0, 1.0),
                 sample['crs'],
                 transform
             )
