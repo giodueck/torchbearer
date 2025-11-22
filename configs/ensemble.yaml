@@ -2,19 +2,36 @@ output:
   path: 'data/output'
   merged_filename: 'merged'
 datamodule_params:
-  sentinel_products: 'train'
+  sentinel_products: 'neuland'
   mask_path: null
 strides:
-  - 112
   - 100
+  - 112
 ensemble:
-  - version_path: data/logs/lightning_logs/version_132
-    checkpoint: checkpoints/epoch=15-step=6400.ckpt
-  - version_path: data/logs/lightning_logs/version_133
-    checkpoint: checkpoints/epoch=3-step=1600.ckpt
-  - version_path: data/logs/lightning_logs/version_134
-    checkpoint: checkpoints/epoch=8-step=3600.ckpt
-  - version_path: data/logs/lightning_logs/version_135
-    checkpoint: checkpoints/epoch=21-step=8800.ckpt
-  - version_path: data/logs/lightning_logs/version_136
-    checkpoint: checkpoints/epoch=9-step=4000.ckpt
+  # unet
+  # - version_path: data/logs/lightning_logs/version_132
+  #   checkpoint: checkpoints/epoch=15-step=6400.ckpt
+  # - version_path: data/logs/lightning_logs/version_133
+  #   checkpoint: checkpoints/epoch=3-step=1600.ckpt
+  # - version_path: data/logs/lightning_logs/version_134
+  #   checkpoint: checkpoints/epoch=8-step=3600.ckpt
+  # - version_path: data/logs/lightning_logs/version_135
+  #   checkpoint: checkpoints/epoch=21-step=8800.ckpt
+  # - version_path: data/logs/lightning_logs/version_136
+  #   checkpoint: checkpoints/epoch=9-step=4000.ckpt
+
+  # farseg
+  # - version_path: data/logs/lightning_logs/version_137
+  #   checkpoint: checkpoints/epoch=3-step=1600.ckpt
+  # - version_path: data/logs/lightning_logs/version_138
+  #   checkpoint: checkpoints/epoch=0-step=400.ckpt
+  # - version_path: data/logs/lightning_logs/version_139
+  #   checkpoint: checkpoints/epoch=9-step=4000.ckpt
+
+  # unet with larger training image set
+- version_path: data/logs/lightning_logs/version_140
+  checkpoint: checkpoints/epoch=13-step=5600.ckpt
+- version_path: data/logs/lightning_logs/version_141
+  checkpoint: checkpoints/epoch=14-step=6000.ckpt
+- version_path: data/logs/lightning_logs/version_142
+  checkpoint: checkpoints/epoch=8-step=3600.ckpt

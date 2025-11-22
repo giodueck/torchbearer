@@ -7,7 +7,7 @@ from torchgeo.datasets import IntersectionDataset, random_grid_cell_assignment, 
 import kornia.augmentation as K
 from kornia.constants import DataKey, Resample
 from torchgeo.samplers.utils import _to_tuple
-from torchgeo.samplers import RandomBatchGeoSampler, GridGeoSampler, RandomGeoSampler
+from torchgeo.samplers import RandomBatchGeoSampler, GridGeoSampler
 import matplotlib.pyplot as plt
 import os
 from typing import Sequence
