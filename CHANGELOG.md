@@ -15,6 +15,12 @@
 
 - Sentinel_60m dataset now respects the products passed and only loads them instead of all found products
 
+## [0.2.1] - 2025-11-14
+
+### Fixed
+
+- CUDA memory leak is now completely fixed
+
 ## [0.2.0] - 2025-11-14
 
 ### Added
