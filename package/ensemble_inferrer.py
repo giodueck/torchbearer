@@ -5,6 +5,8 @@ from sys import argv
 import pathlib
 import rasterio
 from rasterio.io import MemoryFile
+import os
+import yaml
 
 from . import datamodules
 from . import models
@@ -92,7 +94,7 @@ def create_inferrence_mask(config: dict, dst_path: str):
             print(i, end='\r')
     print()
 
-    dest, output_transform = rasterio.merge.merge(tiles)
+    dest, output_transform = rasterio.merge.merge(tiles, method='max')
 
     out_meta.update(
         {
@@ -108,22 +110,72 @@ def create_inferrence_mask(config: dict, dst_path: str):
 
 
 # Args:
-# 1. path/to/checkpoint
-# 2. path/to/version/logs which contains the hparams.yaml and config.yaml files
-# 3. config override, to plot a different dataset than the train dataset
+# 1. ensemble config, with version path and checkpoint filename
 if __name__ == "__main__":
     default_config = configparser.defaultConfig()[0]
+    ensemble_config = configparser.parseConfig(argv[1])[0]
 
-    checkpoint = argv[1]
-    path = pathlib.PosixPath(argv[2])
-    hparams_file = path / "hparams.yaml"
-    config_file = path / "config.yaml"
-    conf = default_config | configparser.parseConfig(config_file)[0]
-    model = models.model_classes[conf['model']].load_from_checkpoint(
-        argv[1], hparams_file=hparams_file)
+    output_path = pathlib.PosixPath(ensemble_config['output']['path'])
+    os.makedirs(output_path, exist_ok=True)
 
-    # For overrides of e.g. the dataset to plot
-    # Should be compatible with original model, of course
-    conf |= configparser.parseConfig(argv[3])[0]
+    print(f'=> Ensemble config used:\n{yaml.dump(ensemble_config, None)}\n')
 
-    create_inferrence_mask(conf, "data/merged.tif")
+    outputs = []
+    for model in ensemble_config['ensemble']:
+
+        version_name = model['version_path'].split('/')[-1]
+        print(f'=> Creating inferrence masks for version: {
+              version_name.split('_')[-1]
+              }')
+
+        path = pathlib.PosixPath(model['version_path'])
+        checkpoint = path / model['checkpoint']
+        hparams_file = path / "hparams.yaml"
+        config_file = path / "config.yaml"
+
+        conf = default_config | configparser.parseConfig(config_file)[0]
+        model = models.model_classes[conf['model']].load_from_checkpoint(
+            checkpoint,
+            hparams_file=hparams_file
+        )
+
+        # For overrides of e.g. the dataset to plot
+        # Should be compatible with original model, of course
+        conf['datamodule_params'] |= ensemble_config['datamodule_params']
+        product_name = ensemble_config['datamodule_params']['sentinel_products']
+
+        for stride in ensemble_config['strides']:
+            conf['datamodule_params']['stride'] = stride
+
+            output_name = output_path / f"{product_name}_{version_name}_{stride}.tif"
+            create_inferrence_mask(conf, output_name)
+            print(f'==> Created: {output_name}')
+            outputs.append(output_name)
+
+    print('=> Merging outputs')
+    # Average all predictions
+    dest, output_transform = rasterio.merge.merge(
+        outputs,
+        method='sum',
+        dtype=rasterio.uint32
+    )
+    dest //= len(outputs)
+    dest = dest.astype(rasterio.uint8)
+
+    with rasterio.open(outputs[0]) as src:
+        out_meta = src.meta.copy()
+        out_meta.update(
+            {
+                "driver": "GTiff",
+                "height": dest.shape[1],
+                "width": dest.shape[2],
+                "transform": output_transform
+            }
+        )
+
+    merged_output = output_path / \
+        f"{ensemble_config['output']['merged_filename']}.tif"
+    with rasterio.open(merged_output, "w", **out_meta) as fp:
+        fp.write(dest)
+
+    print(f'=> Created: {merged_output}')

@@ -41,6 +41,42 @@ Multiple yaml config example (repeat this block for multiple configs)
     max_epochs: 10
 """
 
+"""
+Inferrence map ensemble config structure:
+    {
+        'output': {
+            'path': 'some/path',
+            'merged_filename': 'merged',
+            }
+        'strides': [128, 100],
+        'datamodule_params': {},
+        'ensemble':
+            [
+                {
+                    'version_path': 'path',
+                    'checkpoint': 'path/to/checkpoint.ckpt',
+                }
+            ],
+    }
+
+Example:
+
+output:
+  path: 'data/output'
+  merged_filename: 'merged'
+datamodule_params:
+  sentinel_products: 'neuland'
+  mask_path: null
+strides:
+  - 112
+  - 100
+ensemble:
+  - version_path: data/logs/lightning_logs/version_132
+    checkpoint: checkpoints/epoch=15-step=6400.ckpt
+  - version_path: data/logs/lightning_logs/version_133
+    checkpoint: checkpoints/epoch=3-step=1600.ckpt
+"""
+
 
 def defaultConfig():
     """
