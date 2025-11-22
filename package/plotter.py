@@ -9,6 +9,11 @@ from . import models
 from .config import configparser
 
 
+# Args:
+# 1. path/to/checkpoint
+# 2. path/to/version/logs which contains the hparams.yaml and config.yaml files
+# 3. plot_count, or the number of plots to generate
+# 4. <optional config override>, to plot a different dataset, for example without a ground truth
 if __name__ == "__main__":
     if (len(argv) > 1):
         do_predict = True
@@ -39,6 +44,7 @@ if __name__ == "__main__":
     datamodule = datamodules.datamodules[conf['datamodule']](conf['datamodule_params'])
 
     # Plot sample testing images
+    # If the dataset has a None mask_path, the whole dataset is treated as the test dataset
     datamodule.prepare_data()
     datamodule.setup('test')
 
@@ -50,6 +56,7 @@ if __name__ == "__main__":
                 image_tensor = (torch.FloatTensor(batch['image'])).to(
                     torch.device('cuda'))
                 batch['output'] = model(image_tensor)
+                exit(0)
 
         if i*batch_len >= plot_count:
             break

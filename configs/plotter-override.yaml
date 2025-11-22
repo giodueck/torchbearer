@@ -1,5 +1,7 @@
 - datamodule_params:
     length: 1200
     batch_size: 3
-    sentinel_products: 'train'
+    sentinel_products: 'neuland'
     mask_path: null
+    patch_size: 128
+    stride: 100

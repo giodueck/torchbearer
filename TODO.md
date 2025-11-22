@@ -16,8 +16,9 @@
         - [x] T20KNA
         - [x] T20KNB
         - [x] T20KPC
-        - expand
-    - [ ] Revisit tiles with results of previous experiments to refine masks
+        - expand number of tiles
+        - expand in times of year for the same tiles
+    - [x] Revisit tiles with results of previous experiments to refine masks
 - [x] Sentinel-2 datamodule
     - [x] Dataset configurations, e.g. number and selection of bands
 - Segmentation models
@@ -33,7 +34,7 @@
     - Pass a list of settings and run training loops in sequence
 - [ ] Add segmentation accuracy metric
 - [ ] Add a profiler
-- [ ] Generate predicted masks for entire tiles by collaging predictions
+- [x] Generate predicted masks for entire tiles by collaging predictions
 - Citations:
     - U Net paper: https://arxiv.org/abs/1505.04597
     - Pytorch
@@ -43,9 +44,11 @@
 
 ## Next
 ### Need
-- [ ] Generate predicted masks for entire tiles by collaging predictions
+- [x] Generate predicted masks for entire tiles by collaging predictions
 - [x] Run inference on tiles that were not used in training.
     Different products, configurable with a job config override
+- Tiles:
+    - [ ] expand in times of year for the same tiles
 
 ### Want
 - [ ] Add a profiler

@@ -18,6 +18,7 @@ class Sentinel2_60mDataModule(GeoDataModule):
         self,
         batch_size=16,
         patch_size=64,
+        stride=None,
         length=None,
         num_workers=0,
         sentinel_path='data',
@@ -50,6 +51,10 @@ class Sentinel2_60mDataModule(GeoDataModule):
         self.sentinel_products = sentinel_products
         self.mask_path = mask_path
         self.bands = bands
+        if stride is None:
+            self.stride = self.patch_size
+        else:
+            self.stride = stride
 
     def prepare_data(self):
         """
@@ -85,7 +90,7 @@ class Sentinel2_60mDataModule(GeoDataModule):
                 self.val_dataset, self.patch_size, self.patch_size)
         if stage in ['test']:
             self.test_sampler = GridGeoSampler(
-                self.test_dataset, self.patch_size, self.patch_size)
+                self.test_dataset, self.patch_size, self.stride)
 
     def train_dataloader(self):
         return DataLoader(self.train_dataset, batch_sampler=self.train_batch_sampler, num_workers=self.num_workers, collate_fn=stack_samples)
@@ -132,6 +137,7 @@ def createSentinel2_60mDataModule(params: dict):
     datamodule = Sentinel2_60mDataModule(
         batch_size=params.get('batch_size', 3),
         patch_size=params.get('patch_size', 128),
+        stride=params.get('stride', 128),
         length=params.get('length', 800),
         num_workers=params.get('num_workers', 6),
         sentinel_path=params.get('sentinel_path', 'data'),

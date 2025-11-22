@@ -38,11 +38,12 @@ class Sentinel2_60m(RasterDataset):
     separate_files = True
     all_bands = ('B01', 'B02', 'B03', 'B04', 'B05', 'B06',
                  'B07', 'B8A', 'B09', 'B11', 'B12')
-    rgb_bands = ('B04', 'B03', 'B02')
+    # rgb_bands = ('B04', 'B03', 'B02')
+    rgb_bands = ('B12', 'B8A', 'B04')  # SWIR: easier to spot paleochannels by eye
 
     def __init__(
         self,
-        paths: Path | Iterable[Path] = 'data',
+        path: str = 'data',
         crs: CRS | None = None,
         res: float | tuple[float, float] | None = None,
         bands: Sequence[str] | None = None,
@@ -50,15 +51,23 @@ class Sentinel2_60m(RasterDataset):
         cache: bool = True,
         products: dict = None,
     ):
-        if products is not None:
-            if type(paths) is Path:
-                raise Exception(
-                    'If products is defined, paths must be a string')
+        if type(path) is not str:
+            raise Exception(
+                'path must be a string')
+        path = pathlib.Path(path)
 
-            ls = os.listdir(paths)
-            for key in products.keys():
-                if len([f for f in ls if key in f]) == 0:
-                    self._download(paths, products[key], key)
+        ls = os.listdir(path)
+        for key in products.keys():
+            matches = [f for f in ls if key in f]
+            if len(matches) == 0:
+                self._download(path, products[key], key)
+
+        ls = os.listdir(path)
+        paths = []
+        for key in products.keys():
+            for f in ls:
+                if key in f and '.zip' not in f:
+                    paths.append(str(path / f))
 
         super().__init__(paths, crs, res, bands, transforms, cache)
 

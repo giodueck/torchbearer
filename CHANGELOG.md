@@ -1,5 +1,19 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Inferrer script that collages a large mask from model outputs
+
+### Changed
+
+- Products split into more categories to simplify testing with the inferrer script
+
+### Fixed
+
+- Sentinel_60m dataset now respects the products passed and only loads them instead of all found products
+
 ## [0.2.0] - 2025-11-14
 
 ### Added

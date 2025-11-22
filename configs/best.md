@@ -239,6 +239,17 @@ Test loss: 0.21922406554222107
 
 Better and more confident test dataset predictions than the previous version.
 
+In generating a mask, it seems much more conservative than 131 and hits fewer false positives, but not so conservative that it misses a lot of paleochannels, like 129 seems to do:
+```yaml
+- datamodule_params:
+    length: 1200
+    batch_size: 3
+    sentinel_products: 'neuland'
+    mask_path: null
+    patch_size: 128
+    stride: 100
+```
+
 ### Version 131
 ```yaml
 datamodule: sentinel2_60m
