@@ -2,7 +2,7 @@ output:
   path: 'data/output'
   merged_filename: 'merged'
 datamodule_params:
-  sentinel_products: 'neuland'
+  sentinel_products: 'medanos'
   mask_path: null
 strides:
   - 100
