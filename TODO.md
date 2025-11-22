@@ -45,6 +45,7 @@
 ## Next
 ### Need
 - [x] Generate predicted masks for entire tiles by collaging predictions
+    - [ ] Generate using an ansemble of models
 - [x] Run inference on tiles that were not used in training.
     Different products, configurable with a job config override
 - Tiles:
