@@ -5,12 +5,13 @@ import torch.nn as nn
 
 
 class FCNLightningModule(pl.LightningModule):
-    def __init__(self, in_channels=11, num_filters=64, lr=1e-4):
+    def __init__(self, in_channels=11, num_filters=64, lr=1e-4, weight_decay=1e-4):
         super().__init__()
         self.save_hyperparameters()
         self.model = FCN(in_channels=in_channels,
                          classes=1, num_filters=num_filters)
         self.lr = lr
+        self.weight_decay = weight_decay
         self.loss_fn = nn.BCEWithLogitsLoss()
 
     def forward(self, x):
@@ -45,7 +46,7 @@ class FCNLightningModule(pl.LightningModule):
         return preds
 
     def configure_optimizers(self):
-        return torch.optim.AdamW(self.parameters(), lr=self.lr, weight_decay=1e-4)
+        return torch.optim.AdamW(self.parameters(), lr=self.lr, weight_decay=self.weight_decay)
 
 
 def createFCN(params: dict):
@@ -53,5 +54,6 @@ def createFCN(params: dict):
         in_channels=params.get('in_channels', 11),
         num_filters=params.get('num_filters', 64),
         lr=params.get('lr', 1e-4),
+        weight_decay=params.get('weight_decay', 1e-4),
     )
     return model

@@ -20,7 +20,7 @@ if __name__ == "__main__":
     else:
         do_predict = False
 
-    # Also only relevant when do_predict == True
+    # Only relevant when do_predict == True
     default_config = configparser.defaultConfig()[0]
 
     if do_predict:

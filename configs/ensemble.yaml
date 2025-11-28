@@ -29,9 +29,49 @@ ensemble:
   #   checkpoint: checkpoints/epoch=9-step=4000.ckpt
 
   # unet with larger training image set
-- version_path: data/logs/lightning_logs/version_140
-  checkpoint: checkpoints/epoch=13-step=5600.ckpt
-- version_path: data/logs/lightning_logs/version_141
-  checkpoint: checkpoints/epoch=14-step=6000.ckpt
-- version_path: data/logs/lightning_logs/version_142
-  checkpoint: checkpoints/epoch=8-step=3600.ckpt
+  # - version_path: data/logs/lightning_logs/version_140
+  #   checkpoint: checkpoints/epoch=13-step=5600.ckpt
+  # - version_path: data/logs/lightning_logs/version_141
+  #   checkpoint: checkpoints/epoch=14-step=6000.ckpt
+  # - version_path: data/logs/lightning_logs/version_142
+  #   checkpoint: checkpoints/epoch=8-step=3600.ckpt
+
+  # fcn - literally useless
+  # - version_path: data/logs/lightning_logs/version_145
+  #   checkpoint: checkpoints/epoch=1-step=800.ckpt
+
+  # For thesis FCN section
+  # - version_path: data/logs/lightning_logs/version_148
+  #   checkpoint: checkpoints/epoch=1-step=800.ckpt
+  # - version_path: data/logs/lightning_logs/version_149
+  #   checkpoint: checkpoints/epoch=2-step=1200.ckpt
+  # - version_path: data/logs/lightning_logs/version_150
+  #   checkpoint: checkpoints/epoch=8-step=3600.ckpt
+  # - version_path: data/logs/lightning_logs/version_151
+  #   checkpoint: checkpoints/epoch=4-step=2000.ckpt
+  # - version_path: data/logs/lightning_logs/version_152
+  #   checkpoint: checkpoints/epoch=4-step=2000.ckpt
+
+  # For thesis FarSeg section
+  # - version_path: data/logs/lightning_logs/version_153
+  #   checkpoint: checkpoints/epoch=1-step=800.ckpt
+  # - version_path: data/logs/lightning_logs/version_154
+  #   checkpoint: checkpoints/epoch=3-step=1600.ckpt
+  # - version_path: data/logs/lightning_logs/version_155
+  #   checkpoint: checkpoints/epoch=19-step=8000.ckpt
+  # - version_path: data/logs/lightning_logs/version_156
+  #   checkpoint: checkpoints/epoch=2-step=1200.ckpt
+  # - version_path: data/logs/lightning_logs/version_157
+  #   checkpoint: checkpoints/epoch=27-step=11200.ckpt
+  # - version_path: data/logs/lightning_logs/version_158
+  #   checkpoint: checkpoints/epoch=4-step=2000.ckpt
+
+  # For thesis U-Net section
+  - version_path: data/logs/lightning_logs/version_159
+    checkpoint: checkpoints/epoch=10-step=4400.ckpt
+  - version_path: data/logs/lightning_logs/version_160
+    checkpoint: checkpoints/epoch=10-step=4400.ckpt
+  - version_path: data/logs/lightning_logs/version_161
+    checkpoint: checkpoints/epoch=14-step=6000.ckpt
+  - version_path: data/logs/lightning_logs/version_162
+    checkpoint: checkpoints/epoch=3-step=1600.ckpt

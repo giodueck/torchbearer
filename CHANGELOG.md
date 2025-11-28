@@ -6,6 +6,7 @@
 
 - Inferrer script that collages a large mask from model outputs
 - Ensemble inferrer script that creates enferrence masks like the inferrer script, then combines them into a single mask
+- Tester script that tests the checkpoint of a version against the training dataset and shows its loss
 
 ### Changed
 
