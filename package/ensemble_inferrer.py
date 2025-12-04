@@ -28,7 +28,7 @@ def create_rasterio_dataset(data, crs, transform):
     return dataset
 
 
-def create_inferrence_mask(config: dict, dst_path: str):
+def create_inference_mask(config: dict, dst_path: str):
     pl.seed_everything(conf['seed'])
     datamodule = datamodules.datamodules[conf['datamodule']](
         conf['datamodule_params'])
@@ -124,7 +124,7 @@ if __name__ == "__main__":
     for model in ensemble_config['ensemble']:
 
         version_name = model['version_path'].split('/')[-1]
-        print(f'=> Creating inferrence masks for version: {
+        print(f'=> Creating inference masks for version: {
               version_name.split('_')[-1]
               }')
 
@@ -148,7 +148,7 @@ if __name__ == "__main__":
             conf['datamodule_params']['stride'] = stride
 
             output_name = output_path / f"{product_name}_{version_name}_{stride}.tif"
-            create_inferrence_mask(conf, output_name)
+            create_inference_mask(conf, output_name)
             print(f'==> Created: {output_name}')
             outputs.append(output_name)
 

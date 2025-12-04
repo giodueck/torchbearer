@@ -26,7 +26,7 @@ def create_rasterio_dataset(data, crs, transform):
     return dataset
 
 
-def create_inferrence_mask(config: dict, dst_path: str):
+def create_inference_mask(config: dict, dst_path: str):
     pl.seed_everything(conf['seed'])
     datamodule = datamodules.datamodules[conf['datamodule']](
         conf['datamodule_params'])
@@ -126,4 +126,4 @@ if __name__ == "__main__":
     # Should be compatible with original model, of course
     conf |= configparser.parseConfig(argv[3])[0]
 
-    create_inferrence_mask(conf, "data/merged.tif")
+    create_inference_mask(conf, "data/merged.tif")

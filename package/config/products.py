@@ -37,10 +37,20 @@ medanos = {
     'T20KNC_20250913T194708': 'https://download.dataspace.copernicus.eu/odata/v1/Products(7327d41c-8b46-4814-9b84-cf67f865000c)/$value', # Western-most part of Medanos, not all included in training
 }
 
+mbaracayu = {
+    'T21KXP_20251120T171211': 'https://download.dataspace.copernicus.eu/odata/v1/Products(e7c87e45-c5fe-454a-aa4c-12fb2bae186b)/$value', # Reserva Natural Bosque Mbaracayu
+}
+
+ybyturuzu = {
+    'T21JWM_20251120T171211': 'https://download.dataspace.copernicus.eu/odata/v1/Products(4973f12b-68d5-4c6a-b7c6-df9b73877e5b)/$value' # Reserva de recursos manejados Ybyturuzu
+}
+
 PRODUCTS = {
     'train': train,
     'test': test,
     'neuland': neuland,
     'lp_fila': lp_fila,
     'medanos': medanos,
+    'mbaracayu': mbaracayu,
+    'ybyturuzu': ybyturuzu,
 }
