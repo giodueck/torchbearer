@@ -1,0 +1,68 @@
+- model: farseg
+  model_params:
+    backbone: resnet18
+    backbone_pretrained: false
+  datamodule: sentinel2_60m
+  datamodule_params:
+    length: 1200
+    batch_size: 3
+    bands:
+      - B04
+      - B03
+      - B02
+  seed: 42
+  trainer_params:
+    patience: 7
+    save_top_k: 1
+    max_epochs: 50
+- model: farseg
+  model_params:
+    backbone: resnet18
+    backbone_pretrained: false
+  datamodule: sentinel2_60m
+  datamodule_params:
+    length: 1200
+    batch_size: 3
+    bands:
+      - B12
+      - B8A
+      - B04
+  seed: 42
+  trainer_params:
+    patience: 7
+    save_top_k: 1
+    max_epochs: 50
+- model: farseg
+  model_params:
+    backbone: resnet50
+    backbone_pretrained: false
+  datamodule: sentinel2_60m
+  datamodule_params:
+    length: 1200
+    batch_size: 3
+    bands:
+      - B04
+      - B03
+      - B02
+  seed: 42
+  trainer_params:
+    patience: 7
+    save_top_k: 1
+    max_epochs: 50
+- model: farseg
+  model_params:
+    backbone: resnet50
+    backbone_pretrained: false
+  datamodule: sentinel2_60m
+  datamodule_params:
+    length: 1200
+    batch_size: 3
+    bands:
+      - B12
+      - B8A
+      - B04
+  seed: 42
+  trainer_params:
+    patience: 7
+    save_top_k: 1
+    max_epochs: 50

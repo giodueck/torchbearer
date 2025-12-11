@@ -1,8 +1,8 @@
 output:
   path: 'data/output'
-  merged_filename: 'unet-ybyturuzu'
+  merged_filename: 'unet-neuland'
 datamodule_params:
-  sentinel_products: 'ybyturuzu'
+  sentinel_products: 'neuland'
   mask_path: null
 strides:
   - 100
@@ -84,23 +84,45 @@ ensemble:
 
   # For thesis U-Net section
   # # 64-512
-  - version_path: data/logs/lightning_logs/version_159
-    checkpoint: checkpoints/epoch=10-step=4400.ckpt
-  - version_path: data/logs/lightning_logs/version_160
-    checkpoint: checkpoints/epoch=10-step=4400.ckpt
+  # - version_path: data/logs/lightning_logs/version_159
+  #   checkpoint: checkpoints/epoch=10-step=4400.ckpt
+  # - version_path: data/logs/lightning_logs/version_160
+  #   checkpoint: checkpoints/epoch=10-step=4400.ckpt
   # # 32-512
-  - version_path: data/logs/lightning_logs/version_161
-    checkpoint: checkpoints/epoch=14-step=6000.ckpt
-  - version_path: data/logs/lightning_logs/version_162
-    checkpoint: checkpoints/epoch=3-step=1600.ckpt
+  # - version_path: data/logs/lightning_logs/version_161
+  #   checkpoint: checkpoints/epoch=14-step=6000.ckpt
+  # - version_path: data/logs/lightning_logs/version_162
+  #   checkpoint: checkpoints/epoch=3-step=1600.ckpt
   # # 64-1024
-  - version_path: data/logs/lightning_logs/version_169
-    checkpoint: checkpoints/epoch=10-step=4400.ckpt
-  - version_path: data/logs/lightning_logs/version_170
-    checkpoint: checkpoints/epoch=10-step=4400.ckpt
+  # - version_path: data/logs/lightning_logs/version_169
+  #   checkpoint: checkpoints/epoch=10-step=4400.ckpt
+  # - version_path: data/logs/lightning_logs/version_170
+  #   checkpoint: checkpoints/epoch=10-step=4400.ckpt
 
   # unet with KRA training data
   # - version_path: data/logs/lightning_logs/version_171
   #   checkpoint: checkpoints/epoch=9-step=4000.ckpt
   # - version_path: data/logs/lightning_logs/version_172
   #   checkpoint: checkpoints/epoch=7-step=3200.ckpt
+
+  # # unet with KQV training data
+  # # 64-512
+  # - version_path: data/logs/lightning_logs/version_173
+  #   checkpoint: checkpoints/epoch=1-step=800.ckpt
+  # - version_path: data/logs/lightning_logs/version_176
+  #   checkpoint: checkpoints/epoch=9-step=4000.ckpt
+  # # 32-512
+  # - version_path: data/logs/lightning_logs/version_174
+  #   checkpoint: checkpoints/epoch=14-step=6000.ckpt
+  # - version_path: data/logs/lightning_logs/version_177
+  #   checkpoint: checkpoints/epoch=7-step=3200.ckpt
+  # # 64-1024
+  # - version_path: data/logs/lightning_logs/version_178
+  #   checkpoint: checkpoints/epoch=4-step=2000.ckpt
+  # - version_path: data/logs/lightning_logs/version_179
+  #   checkpoint: checkpoints/epoch=15-step=6400.ckpt
+
+  # - version_path: data/logs/lightning_logs/version_189
+  #   checkpoint: checkpoints/epoch=6-step=2800.ckpt
+  - version_path: data/logs/lightning_logs/version_191
+    checkpoint: checkpoints/epoch=12-step=5200.ckpt

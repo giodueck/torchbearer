@@ -279,3 +279,34 @@ trainer_params:
 Test loss: 0.23361912369728088
 
 Compared to the previous versions: better consistency on the edges of the samples, but lower accuracy in prediction.
+
+### Version 189
+With data from June 2025 and older, works well on test neuland from october and december
+
+### Version 191
+Same data as 189 with a different feature set, seems to get the patchy spots better but misses the longer structures.
+
+```yaml
+- model: unet
+  model_params:
+    features:
+    - 16
+    - 32
+    - 64
+    - 128
+    - 256
+    in_channels: 11
+    lr: 0.0001
+    weight_decay: 0.0001
+  datamodule: sentinel2_60m
+  datamodule_params:
+    batch_size: 3
+    length: 1200
+  seed: 42
+  trainer_params:
+    log_every_n_steps: 8
+    max_epochs: 50
+    min_epochs: 1
+    patience: 7
+    save_top_k: 1
+```

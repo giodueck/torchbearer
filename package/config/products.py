@@ -27,10 +27,15 @@ test = {
 
 neuland = {
     'T20KQV_20251020T174731': 'https://download.dataspace.copernicus.eu/odata/v1/Products(665ca9a2-9f9f-457b-95b7-4629d24dcde8)/$value', # Neuland
+    'T20KQV_20251209T174649': 'https://download.dataspace.copernicus.eu/odata/v1/Products(bea32373-fc07-40e4-930e-7adc133e92b0)/$value', # Neuland
 }
 
 lp_fila = {
     'T20KRA_20251020T174731': 'https://download.dataspace.copernicus.eu/odata/v1/Products(1228c9c5-a508-45b6-8637-4e01e47ad35a)/$value', # Loma Plata and Filadelfia
+}
+
+mariscal = {
+    'T20KQA_20251206T172309': 'https://download.dataspace.copernicus.eu/odata/v1/Products(9ac99d36-5738-4ea5-8fc4-ada19d122014)/$value',
 }
 
 medanos = {
@@ -53,4 +58,5 @@ PRODUCTS = {
     'medanos': medanos,
     'mbaracayu': mbaracayu,
     'ybyturuzu': ybyturuzu,
+    'mariscal': mariscal,
 }
