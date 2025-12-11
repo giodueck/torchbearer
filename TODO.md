@@ -50,14 +50,15 @@
     Different products, configurable with a job config override
 - Tiles:
     - [x] expand in times of year for the same tiles
+    - [ ] get tiles for dry months/years
+    - [ ] get tiles from many years back
+
+### Want
 - [ ] Clean up Readme
 - [ ] Basic usage documentation
 - [ ] Basic implementation detail documentation
-
-### Want
 - [ ] Add a profiler
 - [ ] Revisit tiles with results of previous experiments to refine masks
-- [ ] Add segmentation accuracy metric
 - Generic trainer
     - [ ] Output summary of all models trained and test performance
         Optional since this can also be viewed in TensorBoard

@@ -1,8 +1,8 @@
 output:
   path: 'data/output'
-  merged_filename: 'unet-neuland'
+  merged_filename: 'unet-pilar'
 datamodule_params:
-  sentinel_products: 'neuland'
+  sentinel_products: 'pilar'
   mask_path: null
 strides:
   - 100
@@ -124,5 +124,23 @@ ensemble:
 
   # - version_path: data/logs/lightning_logs/version_189
   #   checkpoint: checkpoints/epoch=6-step=2800.ckpt
-  - version_path: data/logs/lightning_logs/version_191
-    checkpoint: checkpoints/epoch=12-step=5200.ckpt
+
+  # with smaller features
+  # - version_path: data/logs/lightning_logs/version_191
+  #   checkpoint: checkpoints/epoch=12-step=5200.ckpt
+
+  # with smaller features and larger weight_decay (pretty good)
+  # - version_path: data/logs/lightning_logs/version_192
+  #   checkpoint: checkpoints/epoch=17-step=7200.ckpt
+  # with smaller features and smaller lr (pretty bad, but learning was less erratic)
+  # - version_path: data/logs/lightning_logs/version_193
+  #   checkpoint: checkpoints/epoch=31-step=12800.ckpt
+
+  # with smaller features and lr of 5e-5
+  #   weight_decay: 0.0001 (useless)
+  # - version_path: data/logs/lightning_logs/version_194
+  #   checkpoint: checkpoints/epoch=12-step=5200.ckpt
+  #   weight_decay: 0.001 (highlights a lot of ground, but doesn't look too bad)
+  - version_path: data/logs/lightning_logs/version_195
+    checkpoint: checkpoints/epoch=23-step=9600.ckpt
+

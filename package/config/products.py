@@ -50,6 +50,10 @@ ybyturuzu = {
     'T21JWM_20251120T171211': 'https://download.dataspace.copernicus.eu/odata/v1/Products(4973f12b-68d5-4c6a-b7c6-df9b73877e5b)/$value' # Reserva de recursos manejados Ybyturuzu
 }
 
+pilar = {
+    'T21JUL_20251126T173437': 'https://download.dataspace.copernicus.eu/odata/v1/Products(b8f88f8f-9151-4844-af8e-cb4ad392a1b4)/$value' # Pilar
+}
+
 PRODUCTS = {
     'train': train,
     'test': test,
@@ -59,4 +63,5 @@ PRODUCTS = {
     'mbaracayu': mbaracayu,
     'ybyturuzu': ybyturuzu,
     'mariscal': mariscal,
+    'pilar': pilar,
 }
