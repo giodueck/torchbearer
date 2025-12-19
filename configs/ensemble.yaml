@@ -1,8 +1,8 @@
 output:
   path: 'data/output'
-  merged_filename: 'unet-pilar'
+  merged_filename: 'unet-neuland-214-215'
 datamodule_params:
-  sentinel_products: 'pilar'
+  sentinel_products: 'neuland'
   mask_path: null
 strides:
   - 100
@@ -141,6 +141,38 @@ ensemble:
   # - version_path: data/logs/lightning_logs/version_194
   #   checkpoint: checkpoints/epoch=12-step=5200.ckpt
   #   weight_decay: 0.001 (highlights a lot of ground, but doesn't look too bad)
-  - version_path: data/logs/lightning_logs/version_195
-    checkpoint: checkpoints/epoch=23-step=9600.ckpt
+  # - version_path: data/logs/lightning_logs/version_195
+  #   checkpoint: checkpoints/epoch=23-step=9600.ckpt
+
+  # with dry training data and same as last settings
+  # - version_path: data/logs/lightning_logs/version_196
+  #   checkpoint: checkpoints/epoch=13-step=5600.ckpt
+  # - version_path: data/logs/lightning_logs/version_197
+  #   checkpoint: checkpoints/epoch=18-step=7600.ckpt
+
+  # with dry training including Neuland
+  # - version_path: data/logs/lightning_logs/version_198
+  #   checkpoint: checkpoints/epoch=15-step=6400.ckpt
+  # - version_path: data/logs/lightning_logs/version_199
+  #   checkpoint: checkpoints/epoch=15-step=6400.ckpt
+  # - version_path: data/logs/lightning_logs/version_200
+  #   checkpoint: checkpoints/epoch=9-step=4000.ckpt
+  # - version_path: data/logs/lightning_logs/version_201
+  #   checkpoint: checkpoints/epoch=6-step=2800.ckpt
+
+  # with neuland 2015/16 and september and june 2025 from the rest
+  # - version_path: data/logs/lightning_logs/version_203
+  #   checkpoint: checkpoints/epoch=24-step=10000.ckpt
+
+  # with only train, no neuland. Good-ish results in mariscal, less so in neuland. Decently good in argentina
+  # - version_path: data/logs/lightning_logs/version_211
+  #   checkpoint: checkpoints/epoch=9-step=4000.ckpt
+
+  # with only loma plata, filadelfia and neuland, only get pitch black
+
+  # With all kna, knb, kpc train data
+  - version_path: data/logs/lightning_logs/version_214
+    checkpoint: checkpoints/epoch=11-step=4800.ckpt
+  - version_path: data/logs/lightning_logs/version_215
+    checkpoint: checkpoints/epoch=12-step=5200.ckpt
 
