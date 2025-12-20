@@ -1,12 +1,12 @@
 output:
   path: 'data/output'
-  merged_filename: 'unet-neuland-214-215'
+  merged_filename: 'unet-neuland-225'
 datamodule_params:
   sentinel_products: 'neuland'
   mask_path: null
 strides:
-  - 100
-  - 112
+  - 172
+  - 180
 ensemble:
   # unet
   # - version_path: data/logs/lightning_logs/version_132
@@ -171,8 +171,12 @@ ensemble:
   # with only loma plata, filadelfia and neuland, only get pitch black
 
   # With all kna, knb, kpc train data
-  - version_path: data/logs/lightning_logs/version_214
-    checkpoint: checkpoints/epoch=11-step=4800.ckpt
-  - version_path: data/logs/lightning_logs/version_215
-    checkpoint: checkpoints/epoch=12-step=5200.ckpt
+  # - version_path: data/logs/lightning_logs/version_214
+  #   checkpoint: checkpoints/epoch=11-step=4800.ckpt
+  # - version_path: data/logs/lightning_logs/version_215
+  #   checkpoint: checkpoints/epoch=12-step=5200.ckpt
+
+  # 20m dataset (ok results)
+  - version_path: data/logs/lightning_logs/version_225
+    checkpoint: checkpoints/epoch=21-step=8800.ckpt
 
