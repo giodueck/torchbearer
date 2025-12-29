@@ -1,15 +1,11 @@
-FROM rocm/pytorch:rocm7.1_ubuntu24.04_py3.13_pytorch_release_2.9.1
-
-RUN curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
-  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
-    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
-    tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
-
-RUN sed -i -e '/experimental/ s/^#//g' /etc/apt/sources.list.d/nvidia-container-toolkit.list
+FROM rocm/dev-ubuntu-24.04:6.4.4-complete
 
 RUN apt update && \
     apt install -y build-essential && \
+    apt install -y python3 python3-pip \
     apt clean
+
+pip3 install torch torchvision --index-url https://download.pytorch.org/whl/rocm6.4
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt

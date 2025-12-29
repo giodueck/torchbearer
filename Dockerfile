@@ -21,7 +21,7 @@ RUN export NVIDIA_CONTAINER_TOOLKIT_VERSION=1.16.2-1 && \
     apt clean
 
 COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements-old.txt
 
 RUN mkdir /workdir
 

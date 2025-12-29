@@ -8,6 +8,7 @@ Scheduler/task manager for running Pytorch model training unattended
 > The setup for Nvidia GPU use with Docker is simpler, as it is more established, and is what is assumed here.
 > To set up the same for AMD, build and install the binaries for the [AMD container toolkit](https://github.com/ROCm/container-toolkit),
 > then set it up as described in [the guide](https://instinct.docs.amd.com/projects/container-toolkit/en/latest/container-runtime/quick-start-guide.html).
+> This setup was not tested, but a local installation of the needed libraries and Python requirements works.
 
 > [!NOTE]
 > **About old hardware**\
@@ -44,6 +45,11 @@ docker run -ti \
     python -m package.trainer configs/jobs.yaml
 ```
 
+Or locally with
+```sh
+export $(cat env | xargs) && python -m package.trainer configs/jobs.yaml
+```
+
 ## Plotting results
 
 ```sh
@@ -74,6 +80,11 @@ docker run -ti \
     --gpus all \
     torchbearer:0.2.0 \
     python -m package.ensemble_inferrer configs/ensemble.yaml
+```
+
+Or locally with
+```sh
+export $(cat env | xargs) && python -m package.ensemble_inferrer configs/ensemble.yaml
 ```
 
 This allows for using multiple models at once to stack their outputs.
