@@ -1,12 +1,12 @@
 output:
   path: 'data/output'
-  merged_filename: 'unet-neuland-34'
+  merged_filename: 'unet-neuland-35'
 datamodule_params:
   sentinel_products: 'neuland'
   mask_path: null
 strides:
-  - 172
-  - 180
+  - 232
+  - 248
 ensemble:
   # unet
   # - version_path: data/logs/lightning_logs/version_132
@@ -222,5 +222,11 @@ ensemble:
 
   # features 64-1024, batch size 12, 20m dataset
   # decent results, focuses too much on borders between fields, as opposed to 60m models
-  - version_path: data/logs/lightning_logs/version_34
-    checkpoint: checkpoints/epoch=28-step=2900.ckpt
+  # - version_path: data/logs/lightning_logs/version_34
+  #   checkpoint: checkpoints/epoch=28-step=2900.ckpt
+
+  # same as 33, but with patch size of 256
+  # OK results, not as comprehensive as 33
+  - version_path: data/logs/lightning_logs/version_35
+    checkpoint: checkpoints/epoch=18-step=1900.ckpt
+
