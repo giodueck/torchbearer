@@ -1,6 +1,6 @@
 output:
   path: 'data/output'
-  merged_filename: 'unet-neuland-225'
+  merged_filename: 'unet-neuland-34'
 datamodule_params:
   sentinel_products: 'neuland'
   mask_path: null
@@ -177,6 +177,50 @@ ensemble:
   #   checkpoint: checkpoints/epoch=12-step=5200.ckpt
 
   # 20m dataset (ok results)
-  - version_path: data/logs/lightning_logs/version_225
-    checkpoint: checkpoints/epoch=21-step=8800.ckpt
+  # - version_path: data/logs/lightning_logs/version_225
+  #   checkpoint: checkpoints/epoch=21-step=8800.ckpt
 
+  ## With RX 7600 (8GB) and 32GB RAM
+
+  # Trained on
+  # # October 2025
+  # 'T20KNA_20251003T174955'
+  # 'T20KNB_20251003T174955'
+  # # June 2025
+  # 'T20KNA_20250620T173703'
+  # 'T20KNB_20250620T173703'
+  # # January 2025
+  # 'T20KNA_20250116T211859'
+  # 'T20KNB_20250116T211859'
+  # 'T20KPC_20250116T211859'
+  # # August 2022
+  # 'T20KNA_20240714T072909'
+  # 'T20KNB_20240714T072909'
+  # 'T20KPC_20240714T072909'
+  #
+  # with 60m images at size of 192, a larger batch size of 16, 6 workers, and tested on
+  # 'T20KQV_20251020T174731'
+  # 'T20KQV_20250722T194121'
+  # 'T20KQV_20250603T212126'
+  #
+  # good results for colmatados around Neuland
+  # - version_path: data/logs/lightning_logs/version_24
+  #   checkpoint: checkpoints/epoch=12-step=975.ckpt
+
+  # full training set: bad results
+  # - version_path: data/logs/lightning_logs/version_25
+  #   checkpoint: checkpoints/epoch=6-step=525.ckpt
+
+  # full minus 2022: good results for wetter areas around Neuland
+  # - version_path: data/logs/lightning_logs/version_27
+  #   checkpoint: checkpoints/epoch=11-step=900.ckpt
+
+  # same, but batch size 12
+  # for some reason, way better than 27
+  # - version_path: data/logs/lightning_logs/version_33
+  #   checkpoint: checkpoints/epoch=22-step=2300.ckpt
+
+  # features 64-1024, batch size 12, 20m dataset
+  # decent results, focuses too much on borders between fields, as opposed to 60m models
+  - version_path: data/logs/lightning_logs/version_34
+    checkpoint: checkpoints/epoch=28-step=2900.ckpt

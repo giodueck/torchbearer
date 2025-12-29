@@ -52,13 +52,23 @@ def create_inference_mask(config: dict, dst_path: str):
             bound_set.add(bounds)
             shape = sample['output'].cpu().numpy().shape
             # west, south, east, north, width, height
-            transform = rasterio.transform.from_bounds(
-                bounds.minx,
-                bounds.miny,
-                bounds.maxx,
-                bounds.maxy,
-                shape[1],
-                shape[2])
+            try:
+                transform = rasterio.transform.from_bounds(
+                    bounds.minx,
+                    bounds.miny,
+                    bounds.maxx,
+                    bounds.maxy,
+                    shape[1],
+                    shape[2])
+            except Exception:
+                # If the bounds are slice objects instead of individual floats
+                transform = rasterio.transform.from_bounds(
+                    bounds[0].start,
+                    bounds[1].start,
+                    bounds[0].stop,
+                    bounds[1].stop,
+                    shape[1],
+                    shape[2])
 
             ds = create_rasterio_dataset(
                 sample['output'].cpu().numpy().squeeze().clip(0.0, 1.0),

@@ -11,6 +11,9 @@ from . import models
 from .config import configparser
 
 if __name__ == "__main__":
+    # For cards with Tensor cores
+    torch.set_float32_matmul_precision('medium')
+
     default_config = configparser.defaultConfig()[0]
     if len(argv) == 1:
         configs = configparser.defaultConfig()
