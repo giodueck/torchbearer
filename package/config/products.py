@@ -17,7 +17,7 @@ train = {
     'T20KNA_20241003T200351': 'https://download.dataspace.copernicus.eu/odata/v1/Products(4033655f-4ddf-4f0c-93aa-e5f9c13746ae)/$value',
     'T20KNB_20241003T200351': 'https://download.dataspace.copernicus.eu/odata/v1/Products(cc08a79a-3f8e-4894-99f3-6922ff6ca549)/$value',
     'T20KPC_20241020T181904': 'https://download.dataspace.copernicus.eu/odata/v1/Products(9fbca04e-8190-463a-a40d-bddb986248af)/$value',
-    # August 2022
+    # August 2022: drought, bad for training
     # 'T20KNA_20240714T072909': 'https://download.dataspace.copernicus.eu/odata/v1/Products(2cf29f45-39a8-4363-921f-d5fbe8428f40)/$value',
     # 'T20KNB_20240714T072909': 'https://download.dataspace.copernicus.eu/odata/v1/Products(2d6c7cc2-ce75-4bfd-820e-5eda12cb3983)/$value',
     # 'T20KPC_20240714T072909': 'https://download.dataspace.copernicus.eu/odata/v1/Products(758d1703-802e-4d1a-bb5f-078285f047f0)/$value',
@@ -26,7 +26,7 @@ train = {
     # April 2016
     'T20KNA_20231012T132858': 'https://download.dataspace.copernicus.eu/odata/v1/Products(a15f2694-9826-4f75-a68a-05467c5fc8f7)/$value',
     # December 2015
-    'T20KNA_20231016T100753': 'https://download.dataspace.copernicus.eu/odata/v1/Products(d6cb71fb-6a9c-4cc1-8a73-a75a7b3732bf)/$value',
+    # 'T20KNA_20231016T100753': 'https://download.dataspace.copernicus.eu/odata/v1/Products(d6cb71fb-6a9c-4cc1-8a73-a75a7b3732bf)/$value',
 
     # Neuland
     # 'T20KQV_20231010T081418': 'https://download.dataspace.copernicus.eu/odata/v1/Products(91e70f7c-4b56-4ef2-a53e-b3f8ba4397ed)/$value', # August 2015
@@ -45,7 +45,8 @@ train = {
 
 test = {
     'T20KQV_20251020T174731': 'https://download.dataspace.copernicus.eu/odata/v1/Products(665ca9a2-9f9f-457b-95b7-4629d24dcde8)/$value', # Neuland
-    'T20KRA_20251020T174731': 'https://download.dataspace.copernicus.eu/odata/v1/Products(1228c9c5-a508-45b6-8637-4e01e47ad35a)/$value', # Loma Plata and Filadelfia
+    'T20KQV_20250722T194121': 'https://download.dataspace.copernicus.eu/odata/v1/Products(e6e6dc31-f140-42c3-8242-1965c67d301c)/$value', # Neuland winter
+    # 'T20KRA_20251020T174731': 'https://download.dataspace.copernicus.eu/odata/v1/Products(1228c9c5-a508-45b6-8637-4e01e47ad35a)/$value', # Loma Plata and Filadelfia
     'T20KNC_20250913T194708': 'https://download.dataspace.copernicus.eu/odata/v1/Products(7327d41c-8b46-4814-9b84-cf67f865000c)/$value', # Western-most part of Medanos, not all included in training
     'T20KNC_20231022T025928': 'https://download.dataspace.copernicus.eu/odata/v1/Products(22a4d641-db30-47c0-ade0-c5a57b87bb1e)/$value', # same, but august 2016
 }
@@ -73,6 +74,7 @@ mariscal = {
 
 medanos = {
     'T20KNC_20250913T194708': 'https://download.dataspace.copernicus.eu/odata/v1/Products(7327d41c-8b46-4814-9b84-cf67f865000c)/$value', # Western-most part of Medanos, not all included in training
+    'T20KNC_20231022T025928': 'https://download.dataspace.copernicus.eu/odata/v1/Products(22a4d641-db30-47c0-ade0-c5a57b87bb1e)/$value', # same, but august 2016
 }
 
 pilar = {

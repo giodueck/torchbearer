@@ -1,12 +1,12 @@
 output:
   path: 'data/output'
-  merged_filename: 'unet-neuland-35'
+  merged_filename: 'unet-medanos'
 datamodule_params:
-  sentinel_products: 'neuland'
+  sentinel_products: 'medanos'
   mask_path: null
 strides:
-  - 232
-  - 248
+  - 180
+  - 172
 ensemble:
   # unet
   # - version_path: data/logs/lightning_logs/version_132
@@ -227,6 +227,54 @@ ensemble:
 
   # same as 33, but with patch size of 256
   # OK results, not as comprehensive as 33
-  - version_path: data/logs/lightning_logs/version_35
-    checkpoint: checkpoints/epoch=18-step=1900.ckpt
+  # - version_path: data/logs/lightning_logs/version_35
+  #   checkpoint: checkpoints/epoch=18-step=1900.ckpt
+
+  # same set as 33, patch 192, batch 12, length 2000 and patience 5
+  # - version_path: data/logs/lightning_logs/version_39
+  #   checkpoint: checkpoints/epoch=16-step=1700.ckpt
+  # - version_path: data/logs/lightning_logs/version_40
+  #   checkpoint: checkpoints/epoch=5-step=600.ckpt
+
+  # Same as old tests with the 1050, batch_size 3 and patch 192: decent results
+  # - version_path: data/logs/lightning_logs/version_43
+  #   checkpoint: checkpoints/epoch=6-step=2800.ckpt
+
+  # same as 43, with batch_size 12: pitch black
+  # - version_path: data/logs/lightning_logs/version_44
+  #   checkpoint: checkpoints/epoch=2-step=300.ckpt
+
+  # - version_path: data/logs/lightning_logs/version_45
+  #   checkpoint: checkpoints/epoch=1-step=600.ckpt
+
+  # - version_path: data/logs/lightning_logs/version_48
+  #   checkpoint: checkpoints/epoch=0-step=400.ckpt
+  # - version_path: data/logs/lightning_logs/version_49
+  #   checkpoint: checkpoints/epoch=5-step=2400.ckpt
+
+  # finally not pitch black
+  # - version_path: data/logs/lightning_logs/version_50
+  #   checkpoint: checkpoints/epoch=13-step=5600.ckpt
+  # - version_path: data/logs/lightning_logs/version_51
+  #   checkpoint: checkpoints/epoch=13-step=5600.ckpt
+
+  # batch 2: a little too much
+  # - version_path: data/logs/lightning_logs/version_52
+  #   checkpoint: checkpoints/epoch=10-step=6600.ckpt
+
+  # batch 3: a little more conservative
+  # - version_path: data/logs/lightning_logs/version_54
+  #   checkpoint: checkpoints/epoch=15-step=6400.ckpt
+
+  # batch 1: too much
+  # - version_path: data/logs/lightning_logs/version_55
+  #   checkpoint: checkpoints/epoch=15-step=19200.ckpt
+
+  # with 2015/16 data: little confidence, otherwise good
+  # - version_path: data/logs/lightning_logs/version_56
+  #   checkpoint: checkpoints/epoch=4-step=2000.ckpt
+
+  # with 2016 data
+  - version_path: data/logs/lightning_logs/version_57
+    checkpoint: checkpoints/epoch=11-step=4800.ckpt
 
