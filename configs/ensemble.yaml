@@ -1,8 +1,8 @@
 output:
   path: 'data/output'
-  merged_filename: 'unet-medanos-combined-large'
+  merged_filename: 'unet-neuland-7-8'
 datamodule_params:
-  sentinel_products: 'medanos'
+  sentinel_products: 'neuland'
   mask_path: null
 strides:
   - 96
@@ -283,14 +283,14 @@ ensemble:
     checkpoint: checkpoints/epoch=11-step=4800.ckpt
   - version_path: data/logs/lightning_logs/version_66
     checkpoint: checkpoints/epoch=6-step=2800.ckpt
-  # 32-512
-  - version_path: data/logs/lightning_logs/version_67
-    checkpoint: checkpoints/epoch=12-step=5200.ckpt
-  - version_path: data/logs/lightning_logs/version_68
-    checkpoint: checkpoints/epoch=12-step=5200.ckpt
-  # 64-1024
-  - version_path: data/logs/lightning_logs/version_69
-    checkpoint: checkpoints/epoch=12-step=5200.ckpt
-  - version_path: data/logs/lightning_logs/version_70
-    checkpoint: checkpoints/epoch=16-step=6800.ckpt
+  # # 32-512
+  # - version_path: data/logs/lightning_logs/version_67
+  #   checkpoint: checkpoints/epoch=12-step=5200.ckpt
+  # - version_path: data/logs/lightning_logs/version_68
+  #   checkpoint: checkpoints/epoch=12-step=5200.ckpt
+  # # 64-1024
+  # - version_path: data/logs/lightning_logs/version_69
+  #   checkpoint: checkpoints/epoch=12-step=5200.ckpt
+  # - version_path: data/logs/lightning_logs/version_70
+  #   checkpoint: checkpoints/epoch=16-step=6800.ckpt
 

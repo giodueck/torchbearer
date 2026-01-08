@@ -52,14 +52,14 @@ test = {
 }
 
 neuland = {
-    'T20KQV_20251020T174731': 'https://download.dataspace.copernicus.eu/odata/v1/Products(665ca9a2-9f9f-457b-95b7-4629d24dcde8)/$value', # Neuland spring
+    # 'T20KQV_20251020T174731': 'https://download.dataspace.copernicus.eu/odata/v1/Products(665ca9a2-9f9f-457b-95b7-4629d24dcde8)/$value', # Neuland spring
     # 'T20KQV_20251209T174649': 'https://download.dataspace.copernicus.eu/odata/v1/Products(bea32373-fc07-40e4-930e-7adc133e92b0)/$value', # Neuland summer
-    'T20KQV_20250722T194121': 'https://download.dataspace.copernicus.eu/odata/v1/Products(e6e6dc31-f140-42c3-8242-1965c67d301c)/$value', # Neuland winter
-    # 'T20KQV_20240801T210252': 'https://download.dataspace.copernicus.eu/odata/v1/Products(d9e397a0-46ca-4ee6-a3d8-b5fb17047356)/$value', # Neuland august 2024
+    # 'T20KQV_20250722T194121': 'https://download.dataspace.copernicus.eu/odata/v1/Products(e6e6dc31-f140-42c3-8242-1965c67d301c)/$value', # Neuland winter
+    'T20KQV_20240801T210252': 'https://download.dataspace.copernicus.eu/odata/v1/Products(d9e397a0-46ca-4ee6-a3d8-b5fb17047356)/$value', # Neuland august 2024
     # 'T20KQV_20241027T131250': 'https://download.dataspace.copernicus.eu/odata/v1/Products(bd5ebdba-747f-403d-acb2-b310d66d5995)/$value', # Neuland august 2023
     # 'T20KQV_20240711T132134': 'https://download.dataspace.copernicus.eu/odata/v1/Products(fdbedd36-1e3f-48c6-b87a-a7c70e429d29)/$value', # Neuland august 2022 (drought)
     # 'T20KQV_20231010T081418': 'https://download.dataspace.copernicus.eu/odata/v1/Products(91e70f7c-4b56-4ef2-a53e-b3f8ba4397ed)/$value', # August 2015
-    'T20KQV_20250603T212126': 'https://download.dataspace.copernicus.eu/odata/v1/Products(035a3888-4e5a-4eba-9ffa-40eecc9b42fb)/$value', # September 2015
+    # 'T20KQV_20250603T212126': 'https://download.dataspace.copernicus.eu/odata/v1/Products(035a3888-4e5a-4eba-9ffa-40eecc9b42fb)/$value', # September 2015
     # 'T20KQV_20231002T173436': 'https://download.dataspace.copernicus.eu/odata/v1/Products(5b0cbdaa-81f8-4e46-b2e1-804933ea746d)/$value', # August 2016
 }
 
