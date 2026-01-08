@@ -74,7 +74,7 @@ mariscal = {
 
 medanos = {
     'T20KNC_20250913T194708': 'https://download.dataspace.copernicus.eu/odata/v1/Products(7327d41c-8b46-4814-9b84-cf67f865000c)/$value', # Western-most part of Medanos, not all included in training
-    'T20KNC_20231022T025928': 'https://download.dataspace.copernicus.eu/odata/v1/Products(22a4d641-db30-47c0-ade0-c5a57b87bb1e)/$value', # same, but august 2016
+    # 'T20KNC_20231022T025928': 'https://download.dataspace.copernicus.eu/odata/v1/Products(22a4d641-db30-47c0-ade0-c5a57b87bb1e)/$value', # same, but august 2016
 }
 
 pilar = {

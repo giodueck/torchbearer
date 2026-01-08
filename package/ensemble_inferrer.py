@@ -166,10 +166,10 @@ if __name__ == "__main__":
     # Average all predictions
     dest, output_transform = rasterio.merge.merge(
         outputs,
-        method='sum',
+        method='max',
         dtype=rasterio.uint32
     )
-    dest //= len(outputs)
+    # dest //= len(outputs)
     dest = dest.astype(rasterio.uint8)
 
     with rasterio.open(outputs[0]) as src:

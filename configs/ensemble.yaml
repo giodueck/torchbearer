@@ -1,12 +1,11 @@
 output:
   path: 'data/output'
-  merged_filename: 'unet-medanos'
+  merged_filename: 'unet-medanos-combined-large'
 datamodule_params:
   sentinel_products: 'medanos'
   mask_path: null
 strides:
-  - 180
-  - 172
+  - 96
 ensemble:
   # unet
   # - version_path: data/logs/lightning_logs/version_132
@@ -275,6 +274,23 @@ ensemble:
   #   checkpoint: checkpoints/epoch=4-step=2000.ckpt
 
   # with 2016 data
-  - version_path: data/logs/lightning_logs/version_57
+  # - version_path: data/logs/lightning_logs/version_57
+  #   checkpoint: checkpoints/epoch=11-step=4800.ckpt
+
+  # For thesis U-Net section
+  # 64-512
+  - version_path: data/logs/lightning_logs/version_65
     checkpoint: checkpoints/epoch=11-step=4800.ckpt
+  - version_path: data/logs/lightning_logs/version_66
+    checkpoint: checkpoints/epoch=6-step=2800.ckpt
+  # 32-512
+  - version_path: data/logs/lightning_logs/version_67
+    checkpoint: checkpoints/epoch=12-step=5200.ckpt
+  - version_path: data/logs/lightning_logs/version_68
+    checkpoint: checkpoints/epoch=12-step=5200.ckpt
+  # 64-1024
+  - version_path: data/logs/lightning_logs/version_69
+    checkpoint: checkpoints/epoch=12-step=5200.ckpt
+  - version_path: data/logs/lightning_logs/version_70
+    checkpoint: checkpoints/epoch=16-step=6800.ckpt
 
