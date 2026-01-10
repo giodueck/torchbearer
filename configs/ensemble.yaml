@@ -1,8 +1,8 @@
 output:
   path: 'data/output'
-  merged_filename: 'unet-neuland-7-8'
+  merged_filename: 'unet-mariscal-7-8'
 datamodule_params:
-  sentinel_products: 'neuland'
+  sentinel_products: 'mariscal'
   mask_path: null
 strides:
   - 96

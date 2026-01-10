@@ -68,8 +68,9 @@ lp_fila = {
 }
 
 mariscal = {
-    'T20KQA_20251005T193014': 'https://download.dataspace.copernicus.eu/odata/v1/Products(4b066aa3-1c37-4595-a6e8-2215a0053f81)/$value',
+    # 'T20KQA_20251005T193014': 'https://download.dataspace.copernicus.eu/odata/v1/Products(4b066aa3-1c37-4595-a6e8-2215a0053f81)/$value',
     # 'T20KQA_20251206T172309': 'https://download.dataspace.copernicus.eu/odata/v1/Products(9ac99d36-5738-4ea5-8fc4-ada19d122014)/$value',
+    'T20KQA_20250910T193431': 'https://download.dataspace.copernicus.eu/odata/v1/Products(6a55c803-1498-4018-bf64-1f7221baff1b)/$value',
 }
 
 medanos = {
