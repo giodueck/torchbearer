@@ -18,6 +18,10 @@
 - Sentinel_60m dataset now respects the products passed and only loads them instead of all found products
 - Warning when using GPU with tensor cores
 
+### Removed
+
+- Demo and PoC code
+
 ## [0.2.1] - 2025-11-14
 
 ### Fixed
