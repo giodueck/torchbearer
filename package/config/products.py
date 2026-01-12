@@ -83,8 +83,12 @@ pilar = {
 }
 
 argentina = {
-    'T21JTL_20240626T075907': 'https://download.dataspace.copernicus.eu/odata/v1/Products(1a24c7e1-a3d1-4bf4-8867-cc165aa6a3ac)/$value', # Gral San Martin, Argentina, August 2022
-    'T21JUL_20251126T173437': 'https://download.dataspace.copernicus.eu/odata/v1/Products(b8f88f8f-9151-4844-af8e-cb4ad392a1b4)/$value', # Pilar
+    # 'T21JTL_20240626T075907': 'https://download.dataspace.copernicus.eu/odata/v1/Products(1a24c7e1-a3d1-4bf4-8867-cc165aa6a3ac)/$value', # Gral San Martin, Argentina, August 2022
+    # 'T21JUL_20251126T173437': 'https://download.dataspace.copernicus.eu/odata/v1/Products(b8f88f8f-9151-4844-af8e-cb4ad392a1b4)/$value', # Pilar
+    'T21JTM_20250828T172400': 'https://download.dataspace.copernicus.eu/odata/v1/Products(fee30226-b9bb-4f60-9405-649e7bf0a2db)/$value', # Pirane, AR
+    'T21JTL_20250828T172400': 'https://download.dataspace.copernicus.eu/odata/v1/Products(782f91f2-4050-4293-b487-1a21d956f147)/$value', # Gral San Martin, AR
+    'T21JUL_20250828T172400': 'https://download.dataspace.copernicus.eu/odata/v1/Products(23a1e446-1a08-4ecd-bf12-2c14e321d187)/$value', # Pilar, AR-PY
+    'T20JQS_20250828T172400': 'https://download.dataspace.copernicus.eu/odata/v1/Products(ae789661-dffe-476f-bd16-0321506e2033)/$value', # Pampa del indio, AR
 }
 
 PRODUCTS = {
