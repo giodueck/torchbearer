@@ -1,12 +1,13 @@
 # Changelog
 
-## Unreleased
+## [1.0.0] - 2026-01-12
 
 ### Added
 
 - Inferrer script that collages a large mask from model outputs
-- Ensemble inferrer script that creates enferrence masks like the inferrer script, then combines them into a single mask
+- Ensemble inferrer script that creates inferrence masks like the inferrer script, then combines them into a single mask
 - Tester script that tests the checkpoint of a version against the training dataset and shows its loss
+- Sentinel_20m dataset for training/inference on 20m resolution images
 
 ### Changed
 
@@ -15,6 +16,7 @@
 ### Fixed
 
 - Sentinel_60m dataset now respects the products passed and only loads them instead of all found products
+- Warning when using GPU with tensor cores
 
 ## [0.2.1] - 2025-11-14
 
