@@ -1,4 +1,4 @@
-# torchbearer
+# Torchbearer
 Scheduler for running Pytorch model training on Satellite images unattended.
 
 This project makes use of [Pytorch Lightning](https://github.com/Lightning-AI/pytorch-lightning) and [TorchGeo](https://github.com/torchgeo/torchgeo) and allows for using simple configuration files to queue up model configurations to train with one command. It supports using different models and dataloaders in a modular fashion, automatically downloading the needed images from [Copernicus](https://browser.dataspace.copernicus.eu).
