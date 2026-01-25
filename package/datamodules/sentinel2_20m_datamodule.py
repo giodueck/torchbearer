@@ -115,7 +115,7 @@ class Sentinel2_20mDataModule(GeoDataModule):
         if 'output' in sample.keys():
             output = sample['output'].cpu().squeeze()
             output_fig = axes[2].imshow(output, cmap='Blues')
-            pred = (output > 0.5).float()
+            pred = (output > 0.0).float()
             pred_fig = axes[3].imshow(pred, cmap='Blues')
 
         if filename is not None:
